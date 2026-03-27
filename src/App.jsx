@@ -6,7 +6,7 @@ import './App.css'
  * Manages the global layout, navigation, and section orchestration.
  */
 function App() {
-  // Forced update to sync marquee animation: 2026-03-27T08:35
+  // Forced update to sync FAQ section: 2026-03-27T09:25
   return (
     <div className="min-h-screen bg-white">
       <style>{`
@@ -65,7 +65,7 @@ function App() {
           <h1 className="text-6xl md:text-7xl font-semibold text-gray-900 leading-[1.1] tracking-tight">
             Where <span className="text-gray-400">Creativity</span> Meets Technology
           </h1>
-        </div >
+        </div>
         <div className="flex-1 max-w-xl">
           <p className="text-xl text-gray-500 mb-8 leading-relaxed">
             We believe that a well establised Digital presence is the cornerstone of any successful online presence. We are passionate about creating stunning and functional Websites and Applications that not only capture attention but also drive results for our clients.
@@ -80,10 +80,10 @@ function App() {
             <button className="px-8 py-4 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-black transition-all shadow-lg active:scale-95 whitespace-nowrap">Contact Us</button>
           </div>
         </div>
-      </main >
+      </main>
 
       {/* Logo Marquee Section */}
-      < section className="py-12 border-t border-gray-100 overflow-hidden bg-white" >
+      <section className="py-12 border-t border-gray-100 overflow-hidden bg-white">
         <div className="flex animate-marquee whitespace-nowrap gap-16 items-center w-max">
           {[1, 2].map((i) => (
             <div key={i} className="flex gap-16 items-center">
@@ -97,18 +97,18 @@ function App() {
             </div>
           ))}
         </div>
-      </section >
+      </section>
 
       {/* Portfolio Horizontal Scroll Section */}
-      < HorizontalScrollSection >
+      <HorizontalScrollSection>
         <PortfolioCard title="Web & product" image="/portfolio_web.png" tags={["Web", "UX/UI design", "Mobile app"]} />
         <PortfolioCard title="Graphic design & marketing material" image="/portfolio_graphic.png" tags={["Social media creative", "Banners", "Pitch decks", "Packaging"]} />
         <PortfolioCard title="Motion design & video production" image="/portfolio_motion.png" tags={["Animated videos", "2D/3D motion", "AI video", "Editing"]} hasVideo={true} />
         <PortfolioCard title="Brand identity" image="/portfolio_brand.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
-      </HorizontalScrollSection >
+      </HorizontalScrollSection>
 
       {/* Why Teams Choose Section */}
-      < section className="py-24 px-20 bg-white" >
+      <section className="py-24 px-20 bg-white">
         <h2 className="text-5xl font-semibold text-center text-gray-900 mb-16">Why teams choose Codescape</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min">
           <div className="flex flex-col gap-6">
@@ -145,26 +145,29 @@ function App() {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* CTA Section */}
-      < CTASection />
+      <CTASection />
 
       {/* Capabilities Section */}
-      < CapabilitiesSection />
+      <CapabilitiesSection />
 
       {/* Testimonials Section */}
-      < TestimonialsSection />
+      <TestimonialsSection />
 
       {/* Consultation Section */}
-      < ConsultationSection />
+      <ConsultationSection />
 
       {/* Talent Carousel Section */}
-      < TalentCarousel />
+      <TalentCarousel />
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* Footer Section */}
-      < Footer />
-    </div >
+      <Footer />
+    </div>
   )
 }
 
@@ -728,6 +731,100 @@ function Footer() {
 }
 
 /** Icon Components for Status Blocks */
+/**
+ * FAQSection Component
+ * Split-layout FAQ with a question list on the left and a detailed answer box on the right.
+ * Features state-driven question switching and vertical navigation.
+ */
+function FAQSection() {
+  const [activeId, setActiveId] = useState(0);
+
+  const faqs = [
+    {
+      question: "Is this a physical book?",
+      answer: "No, it's a digital book for now. Once it's fully ready, I'm going to do a print run but there's a ton of work involved in making a physical book and I want to do it properly.",
+      detail: "I want it to be like a really fucking nice coffee table style book. People who buy the advanced digital edition will get first dibs on pre-ordering any print editions, so if that's something you're interested in, make sure you get that one."
+    },
+    {
+      question: "How do you make the illustrations?",
+      answer: "We use a combination of hand-drawn techniques and advanced AI-assisted rendering to ensure a unique, premium aesthetic for every project.",
+      detail: "Each piece goes through multiple stages of refinement, from initial concept sketches to high-fidelity digital polish, maintaining a consistent brand voice throughout."
+    },
+    {
+      question: "When will it launch?",
+      answer: "We are on track for a late 2026 release, with early access available to our waitlist members.",
+      detail: "The development is split into three main phases: alpha testing, community feedback integration, and the final production push."
+    },
+    {
+      question: "How much will it cost?",
+      answer: "Pricing will be tiered to offer value for individuals, startups, and large enterprises alike.",
+      detail: "We believe in transparent pricing. No hidden fees, just straightforward subscriptions that scale with your growth and needs."
+    }
+  ];
+
+  const nextFaq = () => setActiveId((prev) => (prev + 1) % faqs.length);
+  const prevFaq = () => setActiveId((prev) => (prev - 1 + faqs.length) % faqs.length);
+
+  return (
+    <section className="py-24 px-20 bg-white border-t border-gray-50">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
+        {/* Questions List */}
+        <div className="lg:w-1/3 pt-4">
+          <h2 className="text-3xl font-semibold text-gray-900 mb-16 tracking-tight">Common Questions.</h2>
+          <div className="flex flex-col gap-8">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`flex items-center justify-between cursor-pointer group transition-all ${activeId === idx ? 'opacity-100 translate-x-2' : 'opacity-30 hover:opacity-50'}`}
+                onClick={() => setActiveId(idx)}
+              >
+                <h3 className={`text-lg font-bold tracking-tight ${activeId === idx ? 'text-gray-900' : 'text-gray-400'}`}>
+                  {faq.question}
+                </h3>
+                {activeId === idx && (
+                  <div className="flex gap-4">
+                    <button onClick={(e) => { e.stopPropagation(); prevFaq(); }} className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                      <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 15l7-7 7 7" /></svg>
+                    </button>
+                    <button onClick={(e) => { e.stopPropagation(); nextFaq(); }} className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                      <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Answer Box */}
+        <div className="lg:w-2/3">
+          <div className="bg-[#f9f9f9] border border-gray-100 rounded-xl p-0 overflow-hidden shadow-sm min-h-[400px]">
+            <div className="px-10 py-8 border-b border-gray-100 flex gap-6 items-start bg-white">
+              <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest pt-1.5">IN:</span>
+              <h3 className="text-lg font-bold text-gray-900 uppercase tracking-widest leading-relaxed">
+                {faqs[activeId].question}
+              </h3>
+            </div>
+            <div className="px-10 py-12 flex flex-col gap-10">
+              <div className="flex gap-6 items-start">
+                <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest pt-1.5">OUT:</span>
+                <div className="flex flex-col gap-8">
+                  <p className="text-lg font-bold text-gray-900 tracking-tight leading-relaxed">
+                    {faqs[activeId].answer}
+                  </p>
+                  <div className="flex flex-col gap-6 text-gray-500 font-medium leading-loose max-w-2xl">
+                    <p>{faqs[activeId].detail}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function UsersIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg> }
 function CheckIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> }
 function BriefcaseIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> }
