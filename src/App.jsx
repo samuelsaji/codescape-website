@@ -77,7 +77,7 @@ function App() {
             </div>
           </div>
           <h1 className="text-6xl md:text-7xl font-semibold text-gray-900 leading-[1.1] tracking-tight">
-            Where <span className="text-gray-400">Creativity</span> Meets Technology
+            Where <span className="text-blue-400">Creativity</span> Meets Technology
           </h1>
         </div>
         <div className="flex-1 max-w-xl">
@@ -300,7 +300,7 @@ function CapabilitiesSection() {
         {/* Sidebar - Pilled Style */}
         <aside className="lg:w-[320px] h-fit sticky top-24 bg-[#f5f5f7] rounded-[40px] overflow-hidden flex flex-col items-center p-8 min-h-[600px] relative">
           <div className="w-full mb-12">
-            <h4 className="text-2xl font-black text-gray-500 uppercase tracking-widest mb-2">your <span className="text-[#00C2FF]">success</span></h4>
+            <h4 className="text-2xl font-black text-black-500 uppercase tracking-widest mb-2">your <span className="text-[#00C2FF]">success</span></h4>
             <p className="text-2xl font-black text-gray-900 uppercase tracking-tighter">becomes our mission</p>
           </div>
 
@@ -366,7 +366,7 @@ function ServiceCard({ title, tags, image, wide, isSmall }) {
       stableRect.current = cardRef.current.getBoundingClientRect();
     };
     setIsHovering(true);
-    
+
     const rect = stableRect.current;
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -901,7 +901,7 @@ function CustomCursor() {
   const cursorRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   // Track mouse position with refs to avoid React re-renders for movement
   const mousePos = useRef({ x: 0, y: 0 });
   const cursorPos = useRef({ x: 0, y: 0 });
@@ -954,7 +954,7 @@ function CustomCursor() {
       <div
         ref={cursorRef}
         className={`fixed top-0 left-0 rounded-full bg-[#00C2FF] shadow-[0_0_20px_rgba(0,194,255,0.4)] ${isHovering ? 'w-12 h-12 opacity-80' : 'w-6 h-6'}`}
-        style={{ 
+        style={{
           willChange: 'transform',
           transition: 'width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out',
           pointerEvents: 'none',
