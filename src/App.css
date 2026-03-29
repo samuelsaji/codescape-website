@@ -1,1 +1,4 @@
 /* App-specific styles - using Tailwind utilities in JSX */
+* {
+  cursor: none !important;
+}

@@ -6,9 +6,23 @@ import './App.css'
  * Manages the global layout, navigation, and section orchestration.
  */
 function App() {
-  // Forced update to sync FAQ section: 2026-03-27T09:25
+  useEffect(() => {
+    const lenis = new window.Lenis({
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    })
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+    return () => lenis.destroy()
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
+      <CustomCursor />
       <style>{`
         @keyframes marquee {
           from { transform: translateX(0); }
@@ -177,15 +191,15 @@ function App() {
  */
 function ConsultationSection() {
   return (
-    <section className="relative h-[450px] rounded-t-[100px] overflow-hidden -mt-20 z-30">
+    <section className="relative h-[320px] rounded-[100px] overflow-hidden -mt-12 mb-24 z-10">
       <img
         src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=2000"
         alt="Moss Landscape"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 bg-black/30" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-[1.1] max-w-4xl mx-auto drop-shadow-2xl">
+        <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-[1.1] max-w-4xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
           Free consultation to scope your creative projects
         </h2>
         <button className="flex items-center gap-4 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/30 text-white rounded-full font-bold hover:bg-white/20 transition-all shadow-2xl active:scale-95 text-base group">
@@ -336,13 +350,66 @@ function CapabilitiesSection() {
  * Individual cards for the capabilities grid with variable widths.
  */
 function ServiceCard({ title, tags, image, wide, isSmall }) {
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const cardRef = useRef(null);
+  const stableRect = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (cardRef.current) {
+      stableRect.current = cardRef.current.getBoundingClientRect();
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!stableRect.current) {
+      stableRect.current = cardRef.current.getBoundingClientRect();
+    };
+    setIsHovering(true);
+    
+    const rect = stableRect.current;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -12; // Slightly more tilt
+    const rotateY = ((x - centerX) / centerX) * 12;
+    setRotate({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setRotate({ x: 0, y: 0 });
+    stableRect.current = null;
+  };
+
   const widthClass = isSmall ? 'w-[calc(33.333%-22px)]' : 'w-[calc(50%-16px)]';
 
   return (
-    <div className={`${widthClass} group cursor-pointer`}>
-      <div className="relative rounded-[40px] overflow-hidden bg-gray-100 border border-gray-200 aspect-[16/11]">
-        <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
-        <div className="absolute inset-x-0 bottom-6 px-6 flex flex-wrap gap-2">
+    <div
+      ref={cardRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`${widthClass} group cursor-pointer`}
+      style={{ perspective: '1000px' }}
+    >
+      <div
+        className={`relative rounded-[40px] overflow-hidden bg-gray-100 border border-gray-200 aspect-[16/11] ${isHovering ? '' : 'transition-transform duration-700 ease-out'}`}
+        style={{
+          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+          transformStyle: 'preserve-3d',
+          backfaceVisibility: 'hidden'
+        }}
+      >
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-90"
+          style={{ transform: 'translateZ(30px)', backfaceVisibility: 'hidden' }}
+        />
+        <div className="absolute inset-x-0 bottom-6 px-6 flex flex-wrap gap-2" style={{ transform: 'translateZ(60px)', backfaceVisibility: 'hidden' }}>
           {tags.map(tag => (
             <span key={tag} className="px-3 py-1.5 rounded-full border border-gray-900/10 text-[8px] font-black text-gray-400 uppercase tracking-widest bg-white/80 backdrop-blur-md">
               {tag}
@@ -611,9 +678,9 @@ function TalentCarousel() {
   }, []);
 
   return (
-    <div ref={containerRef} className="h-[160vh] relative">
+    <div ref={containerRef} className="h-[160vh] relative z-20">
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden bg-white px-20">
-        <div className="flex justify-between items-center mb-16">
+        <div className="flex justify-between items-center mb-16 pt-24">
           <h2 className="text-3xl font-semibold text-gray-900">Why hire if you can subscribe to 200+ vetted talents?</h2>
           <div className="flex gap-4">
             <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-all opacity-40">
@@ -823,6 +890,79 @@ function FAQSection() {
       </div>
     </section>
   )
+}
+
+/**
+ * CustomCursor Component
+ * Provides a dual-layer interactive cursor (dot + following ring).
+ * Supports hover scaling on interactive elements.
+ */
+function CustomCursor() {
+  const cursorRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  
+  // Track mouse position with refs to avoid React re-renders for movement
+  const mousePos = useRef({ x: 0, y: 0 });
+  const cursorPos = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updatePosition = (e) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+      if (!isVisible) setIsVisible(true);
+
+      // Detect hover on interactive elements (throttled by natural movement)
+      const target = e.target;
+      const isClickable = target.closest('a, button, [role="button"], .cursor-pointer');
+      setIsHovering(!!isClickable);
+    };
+
+    const onMouseLeave = () => setIsVisible(false);
+    const onMouseEnter = () => setIsVisible(true);
+
+    window.addEventListener('mousemove', updatePosition);
+    window.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('mouseenter', onMouseEnter);
+
+    // Animation loop for smooth following
+    let rafId;
+    const animate = () => {
+      // Lerp factor: 0.25 (fast but smooth)
+      cursorPos.current.x += (mousePos.current.x - cursorPos.current.x) * 0.25;
+      cursorPos.current.y += (mousePos.current.y - cursorPos.current.y) * 0.25;
+
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0) translate(-50%, -50%)`;
+      }
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener('mousemove', updatePosition);
+      window.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('mouseenter', onMouseEnter);
+      cancelAnimationFrame(rafId);
+    };
+  }, [isVisible]);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[9999]">
+      {/* Solid Blue Circle Cursor */}
+      <div
+        ref={cursorRef}
+        className={`fixed top-0 left-0 rounded-full bg-[#00C2FF] shadow-[0_0_20px_rgba(0,194,255,0.4)] ${isHovering ? 'w-12 h-12 opacity-80' : 'w-6 h-6'}`}
+        style={{ 
+          willChange: 'transform',
+          transition: 'width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out',
+          pointerEvents: 'none',
+          backfaceVisibility: 'hidden'
+        }}
+      />
+    </div>
+  );
 }
 
 function UsersIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg> }
