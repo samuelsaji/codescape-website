@@ -6,6 +6,8 @@ import './App.css'
  * Manages the global layout, navigation, and section orchestration.
  */
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const lenis = new window.Lenis({
       duration: 1.5,
@@ -21,19 +23,21 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white">
-      <CustomCursor />
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-        @keyframes marquee-reverse {
-          from { transform: translateX(-50%); }
-          to { transform: translateX(0); }
-        }
-      `}</style>
-      <nav className="flex items-center justify-between px-20 py-4 bg-white border-b border-gray-200">
+    <>
+      <LoadingScreen onFinished={() => setIsLoading(false)} />
+      <div className={`min-h-screen bg-white transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        <CustomCursor />
+        <style>{`
+          @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          @keyframes marquee-reverse {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
+          }
+        `}</style>
+        <nav className="flex items-center justify-between px-20 py-4 bg-white border-b border-gray-200">
         {/* Logo */}
         <div className="flex items-center">
           <img src="/logo.png" alt="Awesomic Logo" className="h-8 w-auto object-contain" />
@@ -181,7 +185,8 @@ function App() {
 
       {/* Footer Section */}
       <Footer />
-    </div>
+      </div>
+    </>
   )
 }
 
@@ -968,5 +973,67 @@ function CustomCursor() {
 function UsersIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg> }
 function CheckIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> }
 function BriefcaseIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> }
+
+/**
+ * LoadingScreen Component
+ * Implements a full-screen entry animation that cycles through "Hello" in multiple languages.
+ */
+function LoadingScreen({ onFinished }) {
+  const words = [
+    "Hello", "നമസ്കാരം", "नमस्ते", "Hola", "Bonjour", "Ciao", "こんにちは", "안녕하세요", "Hallo", "Olá", "Xin chào", "Marhaba", "Privet", "Cześć", "Shalom", "Welcome"
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const totalWords = words.length;
+    let currentIdx = 0;
+
+    const showNextWord = () => {
+      if (currentIdx < totalWords - 1) {
+        currentIdx++;
+        setIndex(currentIdx);
+        
+        // Show "Welcome" (last word) for longer
+        const nextDelay = (currentIdx === totalWords - 1) ? 800 : 150;
+        setTimeout(showNextWord, nextDelay);
+      } else {
+        // Sequence finished
+        setTimeout(() => {
+          setShow(false);
+          if (onFinished) onFinished();
+        }, 300);
+      }
+    };
+
+    // Start with a small delay for "Hello"
+    setTimeout(showNextWord, 600);
+
+    return () => {};
+  }, []);
+
+  if (!show) return null;
+
+  return (
+    <div className={`fixed inset-0 z-[10000] bg-white flex items-center justify-center transition-transform duration-1000 ease-in-out ${!show ? 'translate-y-[-100%]' : ''}`} style={{ transition: 'transform 1s cubic-bezier(0.85, 0, 0.15, 1)' }}>
+      <div className="flex flex-col items-center">
+        {/* Animated Word */}
+        <h1 className="text-7xl md:text-8xl font-black text-[#00C2FF] tracking-tighter transition-all duration-300 transform scale-110">
+          {words[index]}
+        </h1>
+        {/* Dynamic Indicator */}
+        <div className="mt-8 flex gap-1">
+          {words.map((_, i) => (
+            <div 
+              key={i} 
+              className={`h-1.5 rounded-full bg-[#00C2FF] transition-all duration-300 ${i === index ? 'w-8' : 'w-1.5 opacity-20'}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default App
