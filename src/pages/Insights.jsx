@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 /**
  * Insights Page Component
- * Combines Featured Case Studies and Fresh Blog Insights.
+ * Combines a filterable case-study grid with static insight/article cards.
  */
 function Insights() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -57,6 +57,8 @@ function Insights() {
   const filteredProjects = activeFilter === 'All'
     ? caseStudies
     : caseStudies.filter(p => p.category === activeFilter);
+  // Filter buttons update activeFilter above; this derived list keeps rendering
+  // simple and avoids duplicating filter logic inside JSX.
 
   return (
     <div className="bg-white min-h-screen">

@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from 'react';
 
 /**
  * Hero Section Component
+ * First screen of the landing page with the main positioning statement,
+ * trust badge, email input, and primary contact action.
  */
 function Hero() {
   return (
@@ -36,6 +38,8 @@ function Hero() {
 }
 
 function LogoItem({ icon, text }) {
+  // Small inline icon factory used for text-logo strips without importing an
+  // external icon package for this narrow set of symbols.
   const getIcon = () => {
     switch (icon) {
       case 'diamond': return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>;
@@ -85,6 +89,8 @@ function HorizontalScrollSection({ children }) {
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
+      // Convert this tall section's vertical scroll position into a normalized
+      // 0..1 progress value. That progress drives horizontal card movement.
       const rect = containerRef.current.getBoundingClientRect();
       const scrollRange = containerRef.current.offsetHeight - window.innerHeight;
       const scrolled = -rect.top;
@@ -96,6 +102,8 @@ function HorizontalScrollSection({ children }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Matches the current portfolio card dimensions and gap so the last card can
+  // scroll fully into view before the sticky section releases.
   const totalWidth = 450 * 4 + 32 * 3 + 160;
   const translateX = scrollProgress * (totalWidth - window.innerWidth);
 
@@ -120,6 +128,8 @@ function StatsBlock({ title, subtitle, logos, logoImages, icon }) {
       <p className="text-gray-500 mb-10">{subtitle}</p>
       {imageList.length > 0 && (
         <div className="relative w-full overflow-hidden grayscale -mx-10 whitespace-nowrap">
+          {/* Repeating the same list several times creates a seamless marquee
+              loop with no visible gap at the reset point. */}
           <div className="flex gap-10 items-center w-max px-10" style={{ animation: 'marquee-reverse 40s linear infinite' }}>
             {[...imageList, ...imageList, ...imageList, ...imageList].map((src, i) => (
               <img key={i} src={src} alt="Client" className="h-7 w-auto object-contain opacity-50" />
@@ -159,6 +169,7 @@ function ImageBlock({ title, image }) {
 }
 
 function TagsBlock({ title, subtitle, tags, icon }) {
+  // Split tags into lanes so each row can move at a different speed/direction.
   const rows = [tags.slice(0, 3), tags.slice(3, 6), tags.slice(6, 9)];
   return (
     <div className="bg-[#f5f5f7] rounded-[40px] p-8 relative overflow-hidden flex flex-col">
@@ -188,12 +199,14 @@ function UsersIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none"
 function CheckIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> }
 function BriefcaseIcon() { return <svg className="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> }
 
-function ServiceCard({ title, tags, image, wide, isSmall }) {
+function ServiceCard({ title, tags, image, isSmall }) {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const cardRef = useRef(null);
   const stableRect = useRef(null);
 
+  // Capture the card bounds once per hover session. Measuring while the card is
+  // rotating can cause noisy tilt values because transforms affect layout math.
   const handleMouseEnter = () => { if (cardRef.current) stableRect.current = cardRef.current.getBoundingClientRect(); };
   const handleMouseMove = (e) => {
     if (!stableRect.current) stableRect.current = cardRef.current.getBoundingClientRect();
@@ -203,6 +216,8 @@ function ServiceCard({ title, tags, image, wide, isSmall }) {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
+    // Map pointer distance from center to a modest 3D tilt. X/Y are inverted in
+    // the expected way: vertical movement rotates around X, horizontal around Y.
     const rotateX = ((y - centerY) / centerY) * -12;
     const rotateY = ((x - centerX) / centerX) * 12;
     setRotate({ x: rotateX, y: rotateY });
@@ -373,6 +388,7 @@ function TalentCarousel() {
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
+      // Sticky section progress drives horizontal translation of the talent row.
       const rect = containerRef.current.getBoundingClientRect();
       const scrollHeight = containerRef.current.offsetHeight - window.innerHeight;
       const currentScroll = -rect.top;
@@ -409,6 +425,8 @@ function TalentCarousel() {
 }
 
 function Home() {
+  // Service data is kept close to the home page because it is currently only
+  // used by this landing page grid.
   const services = [
     { title: "UI/UX design", tags: ["Website", "Landing page", "Mobile & web app", "UX/UI audit"], image: "/portfolio/web.png", wide: true },
     { title: "Motion design & video production", tags: ["Animated videos", "2D/3D motion", "AI", "Video editing"], image: "/portfolio/motion.png", wide: true },

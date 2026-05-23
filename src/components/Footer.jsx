@@ -2,7 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 /**
  * Footer Component
- * Comprehensive footer with brand, links, and legal info.
+ * Shared footer with brand positioning, social links, internal navigation,
+ * resource placeholders, service placeholders, and legal links.
  */
 function Footer() {
   return (

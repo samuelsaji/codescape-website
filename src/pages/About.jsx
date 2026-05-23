@@ -2,9 +2,13 @@ import React from 'react';
 
 /**
  * About Page Component
- * "Boutique-Luxury" redesign. Focus on massive whitespace, narrative depth, and cinematic visuals.
+ * Brand-story page. Uses large editorial typography, fixed background accents,
+ * staggered value cards, and image-led team cards to create a cinematic company
+ * profile instead of a simple text-only about page.
  */
 function About() {
+  // Values are data-driven so card copy and stagger offsets can be changed
+  // without editing the rendered JSX structure.
   const values = [
     { title: "Innovation", desc: "We don't just follow trends; we set them. Exploring new technologies to give you a competitive edge.", offset: "mt-0" },
     { title: "Partnership", desc: "We act as an extension of your team, deeply understanding your goals to deliver results that matter.", offset: "mt-24" },
@@ -127,6 +131,7 @@ function About() {
       </footer>
 
       <style dangerouslySetInnerHTML={{ __html: `
+        /* Local animation for the hero's vertical scroll indicator. */
         @keyframes scroll-line {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(100%); }

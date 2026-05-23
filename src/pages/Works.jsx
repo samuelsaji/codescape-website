@@ -2,6 +2,8 @@ import React from 'react';
 
 /**
  * Our Works Page Component
+ * Displays a curated case-study grid. Each project object controls its title,
+ * category, image, and fallback background color.
  */
 function Works() {
   const projects = [

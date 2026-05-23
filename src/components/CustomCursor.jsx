@@ -2,13 +2,17 @@ import { useRef, useState, useEffect } from 'react';
 
 /**
  * CustomCursor Component
- * Provides a dual-layer interactive cursor (dot + following ring).
+ * Draws the visible site cursor after App.css hides the native browser cursor.
+ * The cursor eases toward the real pointer position and grows over clickable
+ * elements to give links and buttons an interactive hover state.
  */
 function CustomCursor() {
   const cursorRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  // mousePos is the real pointer location. cursorPos is the animated location,
+  // which trails behind mousePos for a smoother, less mechanical movement.
   const mousePos = useRef({ x: 0, y: 0 });
   const cursorPos = useRef({ x: 0, y: 0 });
 
@@ -18,6 +22,8 @@ function CustomCursor() {
       if (!isVisible) setIsVisible(true);
 
       const target = e.target;
+      // Match the elements users expect to be interactive. The cursor also
+      // reacts to Tailwind's cursor-pointer utility for custom clickable blocks.
       const isClickable = target.closest('a, button, [role="button"], .cursor-pointer');
       setIsHovering(!!isClickable);
     };
@@ -31,6 +37,8 @@ function CustomCursor() {
 
     let rafId;
     const animate = () => {
+      // Move partway toward the latest mouse position on each frame. The 0.25
+      // factor controls how tightly the custom cursor follows the real pointer.
       cursorPos.current.x += (mousePos.current.x - cursorPos.current.x) * 0.25;
       cursorPos.current.y += (mousePos.current.y - cursorPos.current.y) * 0.25;
 

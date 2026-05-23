@@ -2,6 +2,8 @@ import React from 'react';
 
 /**
  * Terms and Conditions Page Component
+ * Static legal-content page with styled sections, numbered headings, and a
+ * final contact block.
  */
 function Terms() {
   return (
