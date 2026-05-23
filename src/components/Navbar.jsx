@@ -2,7 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 /**
  * Navbar Component
- * Provides navigation links and brand logo.
+ * Primary site navigation. NavLink supplies isActive so the current route can
+ * be highlighted without maintaining separate navigation state.
  */
 function Navbar() {
   const linkClass = ({ isActive }) => 

@@ -1,4 +1,7 @@
 /* App-specific styles - using Tailwind utilities in JSX */
+
+/* Hide the browser cursor globally so CustomCursor.jsx can draw the visible
+   cursor and animate it independently from the native pointer. */
 * {
   cursor: none !important;
 }

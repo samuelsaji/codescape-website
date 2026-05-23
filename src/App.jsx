@@ -11,7 +11,9 @@ import './App.css';
 
 /**
  * Main Application Component
- * Manages routing and global layout.
+ * Defines the public route table and wraps every route in the shared
+ * Layout so navigation, footer, loader, smooth scroll, and cursor behavior
+ * stay consistent across pages.
  */
 function App() {
   return (

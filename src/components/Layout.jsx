@@ -6,13 +6,15 @@ import LoadingScreen from './LoadingScreen';
 
 /**
  * Layout Component
- * Provides common structure for all pages including navigation, cursor, and smooth scroll.
+ * Provides the common frame for all pages: loading screen, custom cursor,
+ * navigation, route content, footer, and optional Lenis smooth scrolling.
  */
 function Layout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Initialize Lenis smooth scroll
+    // Lenis is optional and expected to be loaded globally. If it is absent,
+    // the app falls back to normal browser scrolling without breaking.
     if (window.Lenis) {
       const lenis = new window.Lenis({
         duration: 1.5,
@@ -20,6 +22,7 @@ function Layout({ children }) {
         smoothWheel: true
       });
       
+      // Lenis needs a requestAnimationFrame loop to update scroll easing.
       function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
@@ -35,6 +38,8 @@ function Layout({ children }) {
       <LoadingScreen onFinished={() => setIsLoading(false)} />
       <div className={`min-h-screen bg-white transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <CustomCursor />
+        {/* Some page sections use inline animation names, so the keyframes are
+            injected here to keep them available across every route. */}
         <style>{`
           @keyframes marquee {
             from { transform: translateX(0); }

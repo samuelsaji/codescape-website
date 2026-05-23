@@ -2,6 +2,8 @@ import React from 'react';
 
 /**
  * Careers Page Component
+ * Lightweight hiring page. Job content is data-driven so open roles can be
+ * added, removed, or edited in the jobs array.
  */
 function Careers() {
   const jobs = [

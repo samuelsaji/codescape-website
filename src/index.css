@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Shared marquee animations used by client logo strips, stat blocks, and tags. */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -17,11 +18,13 @@
 }
 
 @theme {
+  /* Tailwind animation tokens consumed with classes like animate-marquee. */
   --animate-marquee: marquee 25s linear infinite;
   --animate-marquee-reverse: marquee-reverse 25s linear infinite;
 
 }
 
+/* Keeps sticky horizontal sections clean while preserving scroll behavior. */
 @utility no-scrollbar {
   &::-webkit-scrollbar {
     display: none;
