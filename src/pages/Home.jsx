@@ -424,6 +424,74 @@ function TalentCarousel() {
   )
 }
 
+function ZuckerbergTestimonial() {
+  return (
+    <section className="relative overflow-hidden py-16 px-6 md:px-16 bg-white border-t border-b border-gray-100 flex items-center justify-center">
+      {/* Dot Pattern Background */}
+      <div
+        className="absolute inset-0 opacity-[0.12] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(#000 1.5px, transparent 1.5px)',
+          backgroundSize: '20px 20px'
+        }}
+      />
+
+      <div className="relative z-10 max-w-5xl w-full flex flex-col md:flex-row items-center gap-8 md:gap-16">
+
+        {/* Left Side: Quote & Content */}
+        <div className="flex-1 flex flex-col items-start text-left relative py-2">
+          {/* Top Double Quote (66) */}
+          <div className="relative mb-4 select-none font-serif font-black text-5xl md:text-6xl leading-none h-8">
+            <span className="absolute -top-[2px] -left-[2px] text-[#3B82F6]">“</span>
+            <span className="relative text-gray-950">“</span>
+          </div>
+
+          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-950 leading-snug md:leading-normal mb-4 tracking-tight font-sans">
+            blah blah blah blah{" "}
+            <span className="relative inline-block px-2 py-0.5 text-white bg-[#3B82F6] transform -rotate-1 rounded-sm font-black mx-1 whitespace-nowrap">
+              background blue blah,
+            </span>{" "}
+            blah blah blah blah blah blah blah blah blah{" "}
+            <span className="text-[#3B82F6] font-black">Blue blah</span>{" "}
+            <span className="text-[#3B82F6] font-black">blah blah blah.</span>
+          </blockquote>
+
+          {/* Author Name & Bottom Quote */}
+          <div className="w-full flex justify-between items-center mt-4">
+            <div className="text-lg md:text-xl font-black text-gray-900 font-sans">
+              -Eatho Mahan
+            </div>
+
+            {/* Bottom Double Quote (99) */}
+            <div className="relative select-none font-serif font-black text-5xl md:text-6xl leading-none h-8">
+              <span className="absolute -top-[2px] -left-[2px] text-[#3B82F6]">”</span>
+              <span className="relative text-gray-950">”</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Portrait Image with Vertical Accent Strip */}
+        <div className="w-full md:w-[35%] flex justify-center items-center relative py-6 md:py-0">
+          {/* Red Accent Column behind the image */}
+          <div className="absolute top-0 bottom-0 left-[25%] w-[90px] md:w-[110px] bg-[#3B82F6] z-0" />
+
+          {/* Grayscale portrait overlapping the bar */}
+          <div className="relative z-10 w-[220px] md:w-[260px] aspect-[4/5] rounded-[30px] overflow-hidden shadow-xl group border-4 border-white bg-gray-100">
+            <img
+              src=""
+              alt="Mark Zuckerberg Quote Portrait"
+              className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-105 group-hover:scale-100"
+            />
+            {/* Subtle Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   // Service data is kept close to the home page because it is currently only
   // used by this landing page grid.
@@ -479,11 +547,12 @@ function Home() {
         <PortfolioCard title="Motion design & video production" image="/portfolio/motion.png" tags={["Animated videos", "2D/3D motion", "AI video", "Editing"]} hasVideo={true} />
         <PortfolioCard title="Brand identity" image="/portfolio/brand.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
       </HorizontalScrollSection>
+      <ZuckerbergTestimonial />
       <section className="py-24 px-20 bg-white">
         <h2 className="text-5xl font-semibold text-center text-gray-900 mb-16">Why teams choose Codescape</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min">
           <div className="flex flex-col gap-6">
-            <StatsBlock title="4 000+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png","/clients/PicsArt_04-03-11.19.34.png","/clients/PicsArt_04-03-11.25.58.png","/clients/PicsArt_04-04-02.23.08.png","/clients/PicsArt_04-04-02.24.06.png","/clients/PicsArt_04-04-02.25.45.png","/clients/PicsArt_04-04-02.28.04.png","/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
+            <StatsBlock title="4 000+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
             <PortraitBlock title="Vetted 0.82% talent" image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" />
             <ImageBlock title="Match with talents within 24 hours" image="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" />
           </div>
