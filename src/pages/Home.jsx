@@ -118,11 +118,11 @@ function HorizontalScrollSection({ children }) {
   )
 }
 
-function StatsBlock({ title, subtitle, logos, logoImages, icon }) {
+function StatsBlock({ title, subtitle, logos, logoImages, icon, className = '' }) {
   const imageList = logoImages || [];
   const textList = logos || [];
   return (
-    <div className="bg-[#f5f5f7] rounded-[40px] p-10 relative overflow-hidden">
+    <div className={`bg-[#f5f5f7] rounded-[40px] p-10 relative overflow-hidden ${className}`}>
       <div className="absolute top-8 right-8 w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm z-10">{icon}</div>
       <h3 className="text-4xl font-bold text-gray-900 mb-1">{title}</h3>
       <p className="text-gray-500 mb-10">{subtitle}</p>
@@ -479,7 +479,7 @@ function ZuckerbergTestimonial() {
           <div className="relative z-10 w-[220px] md:w-[260px] aspect-[4/5] rounded-[30px] overflow-hidden shadow-xl group border-4 border-white bg-gray-100">
             <img
               src=""
-              alt="Mark Zuckerberg Quote Portrait"
+              alt=""
               className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-105 group-hover:scale-100"
             />
             {/* Subtle Gradient Overlay */}
@@ -542,22 +542,22 @@ function Home() {
         </div>
       </section>
       <HorizontalScrollSection>
-        <PortfolioCard title="Web & product" image="/portfolio/web.png" tags={["Web", "UX/UI design", "Mobile app"]} />
-        <PortfolioCard title="Graphic design & marketing material" image="/portfolio/graphic.png" tags={["Social media creative", "Banners", "Pitch decks", "Packaging"]} />
-        <PortfolioCard title="Motion design & video production" image="/portfolio/motion.png" tags={["Animated videos", "2D/3D motion", "AI video", "Editing"]} hasVideo={true} />
-        <PortfolioCard title="Brand identity" image="/portfolio/brand.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
+        <PortfolioCard title="ERP Implementation" image="/portfolio/web.png" tags={["Web", "UX/UI design", "Mobile app"]} />
+        <PortfolioCard title="Store and Warehouse Automationl" image="/portfolio/graphic.png" tags={["Social media creative", "Banners", "Pitch decks", "Packaging"]} />
+        <PortfolioCard title="AI Automation" image="/portfolio/motion.png" tags={["Animated videos", "2D/3D motion", "AI video", "Editing"]} hasVideo={true} />
+        <PortfolioCard title="Digital Transformation" image="/portfolio/brand.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
       </HorizontalScrollSection>
       <ZuckerbergTestimonial />
       <section className="py-24 px-20 bg-white">
         <h2 className="text-5xl font-semibold text-center text-gray-900 mb-16">Why teams choose Codescape</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           <div className="flex flex-col gap-6">
             <StatsBlock title="4 000+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
             <PortraitBlock title="Vetted 0.82% talent" image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" />
             <ImageBlock title="Match with talents within 24 hours" image="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" />
           </div>
           <div className="flex flex-col"><div className="group relative bg-[#f5f5f7] rounded-[40px] overflow-hidden h-full min-h-[700px]"><div className="p-8 flex items-center gap-4"><img src="https://i.pravatar.cc/100?u=marty" alt="Marty" className="w-12 h-12 rounded-full" /><div><h4 className="font-bold text-gray-900">Marty Kausas</h4><p className="text-xs text-gray-500">Founder of <span className="text-[#FF6600] font-bold">Pylon Y</span> (W23)</p></div></div><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600" alt="Marty" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" /></div></div>
-          <div className="flex flex-col gap-6"><TagsBlock title="20,000+" subtitle="Projects completed" tags={["Motion", "Brand identity", "Product design", "Presentation", "Email marketing", "Analytics", "Marketing", "Software development", "Frontend"]} icon={<CheckIcon />} /><StatsBlock title="80+" subtitle="Skill sets" icon={<BriefcaseIcon />} /></div>
+          <div className="flex flex-col gap-6 h-full"><TagsBlock title="20,000+" subtitle="Projects completed" tags={["Motion", "Brand identity", "Product design", "Presentation", "Email marketing", "Analytics", "Marketing", "Software development", "Frontend"]} icon={<CheckIcon />} /><div className="flex-1"><StatsBlock title="80+" subtitle="Skill sets" icon={<BriefcaseIcon />} className="h-full" /></div></div>
         </div>
       </section>
       <CTASection />

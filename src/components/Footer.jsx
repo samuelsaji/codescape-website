@@ -47,16 +47,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Resources Column */}
-        <div>
-          <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-10">Resources</h4>
-          <ul className="flex flex-col gap-5">
-            {["Free templates", "Project management", "Hire Frontend", "Hire Backend"].map(link => (
-              <li key={link}><a href="#" className="text-gray-900 font-bold text-sm tracking-tight hover:text-gray-500 transition-colors">{link}</a></li>
-            ))}
-          </ul>
-        </div>
-
         {/* Services Column */}
         <div>
           <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-10">Services</h4>
