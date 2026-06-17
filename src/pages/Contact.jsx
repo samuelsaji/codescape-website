@@ -1,12 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /**
  * Contact Page Component
  * Contact page with direct contact tiles, a front-end-only inquiry form, and a
- * visual location section. The contact tile data drives labels, links, icons,
- * and accent colors.
+ * visual location section. Submissions are sent to a Google Form and rate-limited
+ * to 5 per 42 hours using localStorage.
  */
+
+// ─── Google Form Configuration ───
+// Replace these with your actual Google Form values:
+// 1. Create a Google Form with fields: Name, Email, Message
+// 2. Get the form action URL (from the form's HTML source)
+// 3. Get each field's entry ID (e.g., entry.123456789)
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd2Clyxgt2AYwSVTM9RoDDGrF9V5ZZqFpQ0_IASTveBHejd7Q/formResponse';
+const FIELD_NAME = 'entry.479296917';
+const FIELD_EMAIL = 'entry.1381270233';
+const FIELD_MESSAGE = 'entry.525302843';
+
+// ─── Rate Limiting ───
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 42 * 60 * 60 * 1000; // 42 hours in ms
+const STORAGE_KEY = 'codescape_contact_submissions';
+
+function getSubmissionTimestamps() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const now = Date.now();
+    return data.filter((ts) => now - ts < RATE_WINDOW_MS);
+  } catch {
+    return [];
+  }
+}
+
+function canSubmit() {
+  return getSubmissionTimestamps().length < RATE_LIMIT;
+}
+
+function recordSubmission() {
+  const timestamps = getSubmissionTimestamps();
+  timestamps.push(Date.now());
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(timestamps));
+}
+
+function getRemainingSubmissions() {
+  return RATE_LIMIT - getSubmissionTimestamps().length;
+}
+
 function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'rate_limited'
+
   const contactTiles = [
     { label: "Phone", info: "+91 8921258262", href: "tel:+918921258262", icon: "phone", color: "bg-blue-100 text-blue-500" },
     { label: "Email", info: "contact@thecodescape.in", href: "mailto:contact@thecodescape.in", icon: "email", color: "bg-purple-100 text-purple-600" },
@@ -16,10 +61,48 @@ function Contact() {
     { label: "Instagram", info: "@thecodescape", href: "https://instagram.com/thecodescape", icon: "instagram", color: "bg-fuchsia-100 text-fuchsia-600" }
   ];
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) return;
+
+    if (!canSubmit()) {
+      setStatus('rate_limited');
+      return;
+    }
+
+    setStatus('submitting');
+
+    try {
+      const formData = new URLSearchParams();
+      formData.append(FIELD_NAME, name);
+      formData.append(FIELD_EMAIL, email);
+      formData.append(FIELD_MESSAGE, message);
+
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString(),
+      });
+
+      recordSubmission();
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch {
+      recordSubmission();
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-[#f8fafc] overflow-hidden">
 
-      {/* Background Decorative SVGs (Subtle Ribbons) */}
+      {/* Background Decorative SVGs */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <svg className="absolute top-0 right-0 w-[800px] h-[800px] text-blue-100" viewBox="0 0 800 800" fill="currentColor">
           <path d="M800 0C800 441.828 441.828 800 0 800L800 800L800 0Z" opacity="0.1" />
@@ -32,7 +115,7 @@ function Contact() {
       <main className="relative z-10 pt-32 lg:pt-48 pb-24 px-8 lg:px-24">
         <div className="max-w-7xl mx-auto">
 
-          {/* Professional Hero Section */}
+          {/* Hero Section */}
           <div className="text-center mb-20 animate-in fade-in slide-in-from-bottom-5 duration-700">
             <h1 className="text-6xl md:text-7xl font-semibold text-blue-500 tracking-tight leading-tight mb-6">
               Contact Us
@@ -42,7 +125,7 @@ function Contact() {
             </p>
           </div>
 
-          {/* Merged Split Section: Details + Form */}
+          {/* Split Section: Details + Form */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch mb-32 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500">
             <div className="space-y-8">
               <h3 className="text-3xl font-semibold text-gray-900 tracking-tight mb-8">Reach out directly.</h3>
@@ -55,8 +138,6 @@ function Contact() {
                     rel="noopener noreferrer"
                     className="group bg-white border border-gray-100 rounded-[30px] p-8 flex flex-col items-start hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-500"
                   >
-                    {/* Icons are selected from tile.icon so the tile list stays
-                        compact while still rendering channel-specific artwork. */}
                     <div className={`w-12 h-12 rounded-full ${tile.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500`}>
                       {tile.icon === 'phone' && <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>}
                       {tile.icon === 'email' && <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
@@ -77,27 +158,73 @@ function Contact() {
             </div>
 
             <div className="bg-white rounded-[60px] p-12 lg:p-20 shadow-sm border border-gray-100">
-              <h3 className="text-4xl font-semibold text-gray-900 tracking-tight mb-4">Start a project.</h3>
-              <p className="text-xl text-gray-400 font-medium mb-12">Submit the form and we'll be in touch.</p>
+              {status === 'success' ? (
+                <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                  <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mb-8">
+                    <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 tracking-tight mb-4">Thank you!</h3>
+                  <p className="text-lg text-gray-500 font-medium mb-8">We will contact you soon.</p>
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="px-8 py-3 bg-gray-900 text-white rounded-full font-semibold hover:bg-black transition-colors"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              ) : status === 'rate_limited' ? (
+                <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                  <div className="w-20 h-20 rounded-full bg-amber-50 flex items-center justify-center mb-8">
+                    <svg className="w-10 h-10 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 tracking-tight mb-4">Limit reached</h3>
+                  <p className="text-lg text-gray-500 font-medium">You've reached the maximum of {RATE_LIMIT} submissions. Please try again later.</p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-4xl font-semibold text-gray-900 tracking-tight mb-4">Start a project.</h3>
+                  <p className="text-xl text-gray-400 font-medium mb-12">Submit the form and we'll be in touch.</p>
 
-              <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
-                <div className="group relative">
-                  <input type="text" className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200" placeholder="Full Name" />
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
-                </div>
-                <div className="group relative">
-                  <input type="email" className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200" placeholder="Email Address" />
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
-                </div>
-                <div className="group relative">
-                  <textarea rows="3" className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200 resize-none" placeholder="Your inquiry..."></textarea>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
-                </div>
-                <button className="w-full py-7 bg-gray-900 text-white rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl active:scale-95 text-xl flex items-center justify-center gap-4 group">
-                  Send Message
-                  <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                </button>
-              </form>
+                  <form className="space-y-10" onSubmit={handleSubmit}>
+                    <div className="group relative">
+                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200" placeholder="Full Name" required />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
+                    </div>
+                    <div className="group relative">
+                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200" placeholder="Email Address" required />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
+                    </div>
+                    <div className="group relative">
+                      <textarea rows="3" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200 resize-none" placeholder="Your inquiry..." required></textarea>
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={status === 'submitting'}
+                      className="w-full py-7 bg-gray-900 text-white rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl active:scale-95 text-xl flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {status === 'submitting' ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </>
+                      )}
+                    </button>
+                    {getRemainingSubmissions() <= 2 && getRemainingSubmissions() > 0 && (
+                      <p className="text-center text-sm text-amber-500 font-medium">{getRemainingSubmissions()} submission{getRemainingSubmissions() === 1 ? '' : 's'} remaining</p>
+                    )}
+                  </form>
+                </>
+              )}
             </div>
           </div>
 
