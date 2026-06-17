@@ -6,7 +6,9 @@ import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import Works from './pages/Works';
 import Insights from './pages/Insights';
+import BlogPost from './pages/BlogPost';
 import Terms from './pages/Terms';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 /**
@@ -18,6 +20,7 @@ import './App.css';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,6 +29,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/works" element={<Works />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/insights/:slug" element={<BlogPost />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>
       </Layout>
