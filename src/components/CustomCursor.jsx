@@ -60,7 +60,7 @@ function CustomCursor() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[9999]">
+    <div className="fixed inset-0 pointer-events-none z-[99999]">
       <div
         ref={cursorRef}
         className={`fixed top-0 left-0 rounded-full bg-[#00C2FF] shadow-[0_0_20px_rgba(0,194,255,0.4)] ${isHovering ? 'w-12 h-12 opacity-80' : 'w-6 h-6'}`}
