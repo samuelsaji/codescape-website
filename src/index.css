@@ -19,6 +19,11 @@
   100% { background-position: 100% 100%; }
 }
 
+@keyframes glance-panel-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 @theme {
   /* Tailwind animation tokens consumed with classes like animate-marquee. */
   --animate-marquee: marquee 25s linear infinite;
