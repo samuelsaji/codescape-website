@@ -334,37 +334,145 @@ function FeaturedTestimonial() {
 
 function FAQSection() {
   const [activeId, setActiveId] = useState(0);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [draggedId, setDraggedId] = useState(null);
+
   const faqs = [
     { question: "Is this a physical book?", answer: "No, it's a digital book for now...", detail: "I want it to be like a really fucking nice coffee table style book..." },
     { question: "How do you make the illustrations?", answer: "We use a combination of hand-drawn techniques...", detail: "Each piece goes through multiple stages of refinement..." },
     { question: "When will it launch?", answer: "We are on track for a late 202 release...", detail: "The development is split into three main phases..." },
     { question: "How much will it cost?", answer: "Pricing will be tiered...", detail: "We believe in transparent pricing..." }
   ];
+
+  const handleDragStart = (e, idx) => {
+    e.dataTransfer.setData("text/faq-id", idx);
+    setDraggedId(idx);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedId(null);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const faqIdStr = e.dataTransfer.getData("text/faq-id");
+    const faqId = parseInt(faqIdStr, 10);
+    if (!isNaN(faqId)) {
+      setActiveId(faqId);
+    }
+    setIsDragOver(false);
+  };
+
   return (
     <section className="py-24 px-20 bg-white border-t border-gray-50">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
-        <div className="lg:w-1/3 pt-4">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-16 tracking-tight">Common Questions.</h2>
-          <div className="flex flex-col gap-8">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className={`flex items-center justify-between cursor-pointer group transition-all ${activeId === idx ? 'opacity-100 translate-x-2' : 'opacity-30 hover:opacity-50'}`} onClick={() => setActiveId(idx)}>
-                <h3 className={`text-lg font-bold tracking-tight ${activeId === idx ? 'text-gray-900' : 'text-gray-400'}`}>{faq.question}</h3>
-              </div>
-            ))}
-          </div>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-2">Common Questions</h2>
+          <p className="text-gray-400 text-sm font-medium">Drag a question card from the left and drop it into the slot on the right</p>
         </div>
-        <div className="lg:w-2/3">
-          <div className="bg-[#f9f9f9] border border-gray-100 rounded-xl p-0 overflow-hidden shadow-sm min-h-[400px]">
-            <div className="px-10 py-8 border-b border-gray-100 flex gap-6 items-start bg-white">
-              <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest pt-1.5">IN:</span>
-              <h3 className="text-lg font-bold text-gray-900 uppercase tracking-widest leading-relaxed">{faqs[activeId].question}</h3>
-            </div>
-            <div className="px-10 py-12 flex flex-col gap-10">
-              <div className="flex gap-6 items-start">
-                <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest pt-1.5">OUT:</span>
-                <div className="flex flex-col gap-8">
-                  <p className="text-lg font-bold text-gray-900 tracking-tight leading-relaxed">{faqs[activeId].answer}</p>
-                  <p className="text-gray-500 font-medium leading-loose max-w-2xl">{faqs[activeId].detail}</p>
+        
+        <div className="flex flex-col lg:flex-row gap-16 items-stretch">
+          {/* Left: Draggable Questions */}
+          <div className="lg:w-1/2 flex flex-col gap-4">
+            {faqs.map((faq, idx) => {
+              const isActive = activeId === idx;
+              const isBeingDragged = draggedId === idx;
+              return (
+                <div
+                  key={idx}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, idx)}
+                  onDragEnd={handleDragEnd}
+                  onClick={() => setActiveId(idx)}
+                  className={`flex items-center justify-between p-6 bg-[#f5f5f7] border rounded-3xl cursor-grab active:cursor-grabbing transition-all select-none hover:shadow-md hover:scale-[1.01] ${
+                    isActive
+                      ? 'border-[#00C2FF] bg-[#00C2FF]/5 shadow-sm'
+                      : 'border-transparent'
+                  } ${isBeingDragged ? 'opacity-40 border-dashed border-gray-300' : 'opacity-100'}`}
+                >
+                  <div className="flex items-center gap-4">
+                    {/* Drag Handle Icon */}
+                    <div className="text-gray-300">
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M8 6a2 2 0 11-4 0 2 2 0 014 0zM8 12a2 2 0 11-4 0 2 2 0 014 0zM8 18a2 2 0 11-4 0 2 2 0 014 0zM14 6a2 2 0 11-4 0 2 2 0 014 0zM14 12a2 2 0 11-4 0 2 2 0 014 0zM14 18a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                    <span className={`text-base font-bold tracking-tight ${isActive ? 'text-gray-900' : 'text-gray-500'}`}>
+                      {faq.question}
+                    </span>
+                  </div>
+                  <div className="text-gray-300">
+                    <svg className="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right: Drop Slot Reader */}
+          <div className="lg:w-1/2 flex flex-col justify-center">
+            <div
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`relative bg-[#f9f9f9] border-2 rounded-[40px] overflow-hidden shadow-lg transition-all duration-300 min-h-[420px] flex flex-col ${
+                isDragOver
+                  ? 'border-[#00C2FF] bg-[#00C2FF]/5 scale-[1.02] shadow-[0_0_25px_rgba(0,194,255,0.15)]'
+                  : 'border-gray-100'
+              }`}
+            >
+              {/* Reader Header / Drop Slot */}
+              <div className={`px-10 py-8 border-b transition-all duration-300 flex gap-6 items-center ${
+                isDragOver ? 'bg-[#00C2FF]/10 border-[#00C2FF]/30' : 'bg-white border-gray-100'
+              }`}>
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex gap-4 items-center">
+                    <span className={`text-xs font-black uppercase tracking-wider ${isDragOver ? 'text-[#00C2FF]' : 'text-gray-300'}`}>
+                      READER SLOT:
+                    </span>
+                    <span className="text-xs px-2 py-0.5 bg-gray-100 rounded text-gray-500 font-bold uppercase tracking-widest animate-pulse">
+                      {isDragOver ? 'READY' : 'ACTIVE'}
+                    </span>
+                  </div>
+                  {/* Visual Drop Icon */}
+                  <div className={`transition-all duration-300 ${isDragOver ? 'translate-y-1 scale-110 text-[#00C2FF]' : 'text-gray-300'}`}>
+                    <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Reader Display Screen */}
+              <div className="px-10 py-10 flex-1 flex flex-col gap-6 justify-center">
+                <div className="flex gap-6 items-start">
+                  <span className="text-xs font-black text-gray-300 uppercase tracking-widest pt-1.5">IN:</span>
+                  <h3 className="text-xl font-bold text-gray-950 uppercase tracking-wide leading-relaxed">
+                    {faqs[activeId].question}
+                  </h3>
+                </div>
+                <div className="h-[1px] bg-gray-200/60 my-2" />
+                <div className="flex gap-6 items-start">
+                  <span className="text-xs font-black text-gray-300 uppercase tracking-widest pt-1.5">OUT:</span>
+                  <div className="flex flex-col gap-4">
+                    <p className="text-lg font-bold text-gray-900 tracking-tight leading-relaxed">
+                      {faqs[activeId].answer}
+                    </p>
+                    <p className="text-gray-500 font-medium leading-loose max-w-xl">
+                      {faqs[activeId].detail}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
