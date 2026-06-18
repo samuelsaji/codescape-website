@@ -112,7 +112,7 @@ function Contact() {
         </svg>
       </div>
 
-      <main className="relative z-10 pt-32 lg:pt-48 pb-24 px-8 lg:px-24">
+      <main className="relative z-10 pt-16 lg:pt-24 pb-24 px-8 lg:px-24">
         <div className="max-w-7xl mx-auto">
 
           {/* Hero Section */}
