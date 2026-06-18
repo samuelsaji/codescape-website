@@ -514,7 +514,8 @@ function Home() {
         <div className="flex animate-marquee whitespace-nowrap gap-16 items-center w-max">
           {[1, 2].map((i) => (
             <div key={i} className="flex gap-16 items-center">
-              <img src="/clients/PicsArt_04-03-11.18.38.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+
+              <img src="/clients/PicsArt_04-03-11.25.58.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-03-11.19.34.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-03-11.25.58.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.23.08.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
@@ -549,7 +550,6 @@ function Home() {
         <PortfolioCard title="AI Automation" image="/Horizontalscroll/ai.png" tags={["Animated videos", "2D/3D motion", "AI video",]} hasVideo={true} />
         <PortfolioCard title="Digital Transformation" image="/Horizontalscroll/digital.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
       </HorizontalScrollSection>
-      <ZuckerbergTestimonial />
       <section className="py-24 px-20 bg-white">
         <h2 className="text-5xl font-semibold text-center text-gray-900 mb-16">Why teams choose Codescape</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
@@ -573,6 +573,7 @@ function Home() {
         </div>
       </section>
       <TestimonialsSection />
+      <ZuckerbergTestimonial />
       <ConsultationSection />
       <TalentCarousel />
       <FAQSection />
