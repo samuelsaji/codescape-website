@@ -493,6 +493,8 @@ function ZuckerbergTestimonial() {
 }
 
 function Home() {
+  const [activeCategory, setActiveCategory] = useState(0);
+  const categories = ['ERP Implementation', 'Store & Warehouse', 'AI Automation', 'Digital Transformation'];
   // Service data is kept close to the home page because it is currently only
   // used by this landing page grid.
   const services = [
@@ -565,7 +567,7 @@ function Home() {
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="lg:w-[320px] h-fit sticky top-24 bg-[#f5f5f7] rounded-[40px] overflow-hidden flex flex-col items-center p-8 min-h-[600px] relative">
             <div className="w-full mb-12"><h4 className="text-2xl font-black text-black-500 uppercase tracking-widest mb-2">your <span className="text-[#00C2FF]">success</span></h4><p className="text-2xl font-black text-gray-900 uppercase tracking-tighter">becomes our mission</p></div>
-            <nav className="w-full flex flex-col gap-3 relative z-10"><button className="flex items-center gap-4 bg-white px-6 py-4 rounded-full shadow-sm"><span className="text-xs font-black text-gray-900 uppercase tracking-widest">Webdesigning</span></button><button className="flex items-center gap-4 bg-white/50 px-6 py-4 rounded-full opacity-60"><span className="text-[10px] font-black text-gray-400 uppercase tracking-tight">E-comerce</span></button></nav>
+            <nav className="w-full flex flex-col gap-3 relative z-10">{categories.map((cat, i) => (<button key={cat} onClick={() => setActiveCategory(i)} className={`flex items-center gap-4 px-6 py-4 rounded-full transition-all active:scale-95 ${activeCategory === i ? 'bg-white shadow-sm' : 'bg-white/50 opacity-60 hover:opacity-80'}`}><span className={`font-black uppercase ${activeCategory === i ? 'text-xs text-gray-900 tracking-widest' : 'text-[10px] text-gray-400 tracking-tight'}`}>{cat}</span></button>))}</nav>
           </aside>
           <div className="flex-1"><div className="flex flex-wrap gap-x-8 gap-y-12">{services.map((service, i) => (<ServiceCard key={service.title} {...service} isSmall={i >= 2 && i <= 4} />))}</div></div>
         </div>
