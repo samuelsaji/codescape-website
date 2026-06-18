@@ -153,20 +153,15 @@ function StatsBlock({ title, subtitle, logos, logoImages, icon, className = '' }
   )
 }
 
-function PortraitBlock({ title, image }) {
-  return (
-    <div className="bg-[#f5f5f7] rounded-[40px] pt-10 overflow-hidden text-center">
-      <h3 className="text-xl font-bold text-gray-900 mb-6">{title}</h3>
-      <img src={image} alt="" className="w-full h-48 object-cover object-top" />
-    </div>
-  )
-}
-
 function ImageBlock({ title, image }) {
   return (
     <div className="relative rounded-[40px] overflow-hidden h-64 group">
       <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-      <div className="absolute inset-0 bg-black/30 p-10 flex flex-col justify-end"><h3 className="text-xl font-bold text-white max-w-[200px]">{title}</h3></div>
+      {title && (
+        <div className="absolute inset-0 bg-black/30 p-10 flex flex-col justify-end">
+          <h3 className="text-xl font-bold text-white max-w-[200px]">{title}</h3>
+        </div>
+      )}
     </div>
   )
 }
@@ -670,8 +665,8 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           <div className="flex flex-col gap-6">
             <StatsBlock title="4 000+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
-            <PortraitBlock title="Vetted 0.82% talent" image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" />
-            <ImageBlock title="Match with talents within 24 hours" image="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" />
+            <ImageBlock title="" image="/why/1.jpeg" />
+            <ImageBlock title="" image="/why/2.jpeg" />
           </div>
           <div className="flex flex-col"><div className="group relative bg-[#f5f5f7] rounded-[40px] overflow-hidden h-full min-h-[700px]"><div className="p-8 flex items-center gap-4"><img src="https://i.pravatar.cc/100?u=marty" alt="Marty" className="w-12 h-12 rounded-full" /><div><h4 className="font-bold text-gray-900">Marty Kausas</h4><p className="text-xs text-gray-500">Founder of <span className="text-[#FF6600] font-bold">Pylon Y</span> (W23)</p></div></div><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600" alt="Marty" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" /></div></div>
           <div className="flex flex-col gap-6 h-full"><TagsBlock title="20,000+" subtitle="Projects completed" tags={["Motion", "Brand identity", "Product design", "Presentation", "Email marketing", "Analytics", "Marketing", "Software development", "Frontend"]} icon={<CheckIcon />} /><div className="flex-1"><StatsBlock title="80+" subtitle="Skill sets" icon={<BriefcaseIcon />} className="h-full" /></div></div>
