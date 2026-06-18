@@ -35,8 +35,8 @@ function About() {
       <header className="relative z-10 min-h-screen flex flex-col justify-start pt-24 px-8 lg:px-24">
         <div className="max-w-[1400px]">
           <h1 className="text-[12vw] lg:text-[10vw] font-semibold text-gray-950 leading-[0.85] tracking-tighter mb-12 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200">
-            <span className="text-blue-500">Design</span> <br />
-            <span className="italic">Driven</span> By <br />
+            Design <br />
+            <span className="text-blue-500 italic">Driven</span> By <br />
             Purpose.
           </h1>
           <div className="flex flex-col md:flex-row items-end justify-between gap-12 mt-12 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500">
