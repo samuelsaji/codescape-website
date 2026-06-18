@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 /**
  * Contact Page Component
@@ -47,10 +48,22 @@ function getRemainingSubmissions() {
 }
 
 function Contact() {
+  const location = useLocation();
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(location.state?.email || '');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'rate_limited'
+
+  useEffect(() => {
+    // Scroll smoothly to center the contact details/form section on page load
+    const timer = setTimeout(() => {
+      const element = document.getElementById('contact-section');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const contactTiles = [
     { label: "Phone", info: "+91 8921258262", href: "tel:+918921258262", icon: "phone", color: "bg-blue-100 text-blue-500" },
@@ -126,7 +139,7 @@ function Contact() {
           </div>
 
           {/* Split Section: Details + Form */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch mb-32 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500">
+          <div id="contact-section" className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch mb-32 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500">
             <div className="space-y-8">
               <h3 className="text-3xl font-semibold text-gray-900 tracking-tight mb-8">Reach out directly.</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

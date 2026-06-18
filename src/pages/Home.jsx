@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Hero Section Component
@@ -6,6 +7,8 @@ import { useRef, useState, useEffect } from 'react';
  * trust badge, email input, and primary contact action.
  */
 function Hero() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   return (
     <main className="px-20 py-20 flex flex-col md:flex-row items-center justify-between gap-16">
       <div className="flex-1 max-w-2xl">
@@ -29,8 +32,8 @@ function Hero() {
           We believe that a well established Digital presence is the cornerstone of any successful online presence. We are passionate about creating stunning and functional Websites and Applications that not only capture attention but also drive results for our clients.
         </p>
         <div className="bg-white p-2 pl-6 border border-gray-100 rounded-full shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] flex items-center gap-4 max-w-md">
-          <input type="text" placeholder="Email address" className="flex-1 bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm" />
-          <button className="px-8 py-4 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-black transition-all shadow-lg active:scale-95 whitespace-nowrap">Contact Us</button>
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="flex-1 bg-transparent outline-none text-gray-600 placeholder-gray-400 text-sm" />
+          <button onClick={() => navigate('/contact', { state: { email } })} className="px-8 py-4 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-black transition-all shadow-lg active:scale-95 whitespace-nowrap">Contact Us</button>
         </div>
       </div>
     </main>
@@ -240,6 +243,8 @@ function ServiceCard({ title, tags, image, isSmall }) {
 }
 
 function CTASection() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   return (
     <section className="px-20 pb-20">
       <div className="relative h-[400px] rounded-[40px] overflow-hidden flex flex-col items-center justify-center">
@@ -249,8 +254,8 @@ function CTASection() {
             You are one call away from a top creative <span className="text-[#00C2FF]">tech</span> team
           </h2>
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <input type="text" placeholder="Email address" className="px-8 py-5 w-full md:w-96 bg-white rounded-full outline-none text-gray-700 placeholder-gray-400 font-medium" />
-            <button className="px-10 py-5 bg-black text-white rounded-full font-bold hover:bg-gray-900 transition-all shadow-xl active:scale-95 whitespace-nowrap">Book a call</button>
+            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="px-8 py-5 w-full md:w-96 bg-white rounded-full outline-none text-gray-700 placeholder-gray-400 font-medium" />
+            <button onClick={() => navigate('/contact', { state: { email } })} className="px-10 py-5 bg-black text-white rounded-full font-bold hover:bg-gray-900 transition-all shadow-xl active:scale-95 whitespace-nowrap">Book a call</button>
           </div>
         </div>
       </div>
@@ -259,13 +264,14 @@ function CTASection() {
 }
 
 function ConsultationSection() {
+  const navigate = useNavigate();
   return (
     <section className="relative h-[320px] rounded-[100px] overflow-hidden -mt-12 mb-24 z-10 mx-20">
       <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=2000" alt="Moss Landscape" className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-black/30" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-[1.1] max-w-4xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">Free consultation to scope your creative projects</h2>
-        <button className="flex items-center gap-4 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/30 text-white rounded-full font-bold hover:bg-white/20 transition-all shadow-2xl active:scale-95 text-base group">
+        <button onClick={() => navigate('/contact')} className="flex items-center gap-4 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/30 text-white rounded-full font-bold hover:bg-white/20 transition-all shadow-2xl active:scale-95 text-base group">
           <span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&gt;&gt;&gt;</span>Book demo<span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&lt;&lt;&lt;</span>
         </button>
       </div>
