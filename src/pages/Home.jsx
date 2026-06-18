@@ -294,7 +294,8 @@ function TestimonialsSection() {
   return (
     <section className="py-24 px-20 bg-white">
       <h2 className="text-5xl font-bold text-center text-gray-900 mb-20">Trusted By 400+ Companies</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <ZuckerbergTestimonial />
+      <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
         {testimonials.map((col, i) => (
           <div key={i} className="flex flex-col gap-6">
             {col.map((item, j) => (
@@ -681,7 +682,6 @@ function Home() {
         </div>
       </section>
       <TestimonialsSection />
-      <ZuckerbergTestimonial />
       <ConsultationSection />
       <TalentCarousel />
       <FAQSection />
