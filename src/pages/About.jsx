@@ -16,8 +16,8 @@ function About() {
   ];
 
   const team = [
-    { name: "Arjun ", role: "Founder & CEO", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=600" },
-    { name: "Priya ", role: "Creative Director", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" },
+    { name: "Samual Saji", role: "Founder & CEO", img: "/workers/WhatsApp Image 2026-06-18 at 10.21.00 PM.jpeg" },
+    { name: "Joel", role: "Creative Director", img: "/workers/WhatsApp Image 2026-06-18 at 10.28.35 PM.jpeg" },
     { name: "Rahul", role: "CTO", img: "https://images.unsplash.com/photo-1506794778242-92bb52bd3586?auto=format&fit=crop&q=80&w=600" },
     { name: "Ananya", role: "Head of Strategy", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=600" }
   ];
