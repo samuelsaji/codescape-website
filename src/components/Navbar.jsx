@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 /**
  * Navbar Component
@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom';
  */
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isContactPage = pathname === '/contact';
 
   const linkClass = ({ isActive }) => 
     `text-sm font-medium transition-colors ${isActive ? 'text-blue-500' : 'text-gray-700 hover:text-gray-900'}`;
@@ -39,13 +41,16 @@ function Navbar() {
               About us
             </NavLink>
           </li>
+          {isContactPage && (
+            <li>
+              <NavLink to="/careers" className={linkClass}>
+                Careers
+              </NavLink>
+            </li>
+          )}
         </ul>
 
-        {/* Right Side - Desktop */}
         <div className="hidden lg:flex items-center gap-5">
-          <NavLink to="/careers" className={linkClass}>
-            Careers
-          </NavLink>
           <NavLink 
             to="/contact" 
             className="px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
@@ -72,7 +77,9 @@ function Navbar() {
           <NavLink to="/works" className={mobileLinkClass} onClick={() => setIsOpen(false)}>Our Work</NavLink>
           <NavLink to="/insights" className={mobileLinkClass} onClick={() => setIsOpen(false)}>Insights</NavLink>
           <NavLink to="/about" className={mobileLinkClass} onClick={() => setIsOpen(false)}>About us</NavLink>
-          <NavLink to="/careers" className={mobileLinkClass} onClick={() => setIsOpen(false)}>Careers</NavLink>
+          {isContactPage && (
+            <NavLink to="/careers" className={mobileLinkClass} onClick={() => setIsOpen(false)}>Careers</NavLink>
+          )}
           <NavLink 
             to="/contact"
             className="mt-3 px-5 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors text-center"

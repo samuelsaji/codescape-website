@@ -509,8 +509,8 @@ function FAQSection() {
 
 function TalentCarousel() {
   const talents = [
-    { name: "Samual", role: "Product designer", exp: "7+ years", tags: ["FinTech", "AI", "Healthcare", "Crypto"], workedWith: "Coca-Cola", image: "/workers/WhatsApp Image 2026-06-18 at 10.21.00 PM.jpeg" },
-    { name: "Joel", role: "Illustrator", exp: "11+ years", tags: ["E-commerce", "Gaming", "NFT"], workedWith: "Disney", image: "/workers/WhatsApp Image 2026-06-18 at 10.28.35 PM.jpeg" },
+    { name: "Samual", role: "CEO", exp: "7+ years", tags: ["FinTech", "AI", "Healthcare", "Crypto"], workedWith: "Coca-Cola", image: "/workers/WhatsApp Image 2026-06-18 at 10.21.00 PM.jpeg" },
+    { name: "Joel", role: "Backend Developer", exp: "11+ years", tags: ["E-commerce", "Gaming", "NFT"], workedWith: "Disney", image: "/workers/WhatsApp Image 2026-06-18 at 10.28.35 PM.jpeg" },
     { name: "Eldho", role: "Brand designer", exp: "15+ years", tags: ["SaaS", "EdTech", "FinTech", "AI"], workedWith: "PandaDoc", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" },
     { name: "Jhon", role: "Graphic artist", exp: "15+ years", tags: ["Gaming", "AI", "Fashion", "Advertising"], workedWith: "MTV", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" },
     { name: "Nick", role: "Full-Stack Developer", exp: "8+ years", tags: ["HealtTech", "SaaS"], workedWith: "VERIZON", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400" }
@@ -707,9 +707,15 @@ function Home() {
             <StatsBlock title="80+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
             <div className="flex-1 relative rounded-[40px] overflow-hidden group min-h-[200px]">
               <img src="/why/1.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex flex-col justify-end" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%)' }}>
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">A Team That Delivers</h3>
+              </div>
             </div>
             <div className="flex-1 relative rounded-[40px] overflow-hidden group min-h-[200px]">
               <img src="/why/2.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex flex-col justify-end" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%)' }}>
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Understanding Every Requirement</h3>
+              </div>
             </div>
           </div>
           <div className="flex flex-col"><div className="group relative bg-[#f5f5f7] rounded-[40px] overflow-hidden h-full min-h-[700px]"><div className="relative z-10 p-8 flex items-center gap-4"><img src="https://i.pravatar.cc/100?u=marty" alt="Marty" className="w-12 h-12 rounded-full" /><div><h4 className="font-bold text-gray-900">Samual</h4><p className="text-xs text-gray-500">Founder of <span className="text-[#FF6600] font-bold">Codescape</span></p></div></div><video src="/why/video.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" /></div></div>
