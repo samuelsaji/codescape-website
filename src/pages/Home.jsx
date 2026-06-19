@@ -666,17 +666,23 @@ function Home() {
             <div key={i} className="flex gap-16 items-center">
 
               <img src="/clients/PicsArt_04-03-11.25.58.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-03-11.19.34.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-03-11.25.58.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.23.08.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.24.06.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.25.45.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.28.04.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.29.15.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.29.46.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.30.36.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/1_20260619_150305_0000.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/2_20260619_150305_0001.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/3_20260619_150305_0002.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/4_20260619_150305_0003.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/6_20260619_145139_0005.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/8_20260619_145139_0007.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/9_20260619_145139_0008.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/10_20260619_145139_0009.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/11_20260619_145139_0010.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/12_20260619_145139_0011.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/13_20260619_145139_0012.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/14_20260619_145139_0013.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/15_20260619_145139_0014.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/20260619_144343_0000.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/Untitled design_20260619_144136_0000.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/Untitled design_20260619_144438_0000.webp" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.31.04.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-02.31.25.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.31.41.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.31.59.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.32.55.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
@@ -684,12 +690,7 @@ function Home() {
               <img src="/clients/PicsArt_04-04-02.33.36.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.33.52.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
               <img src="/clients/PicsArt_04-04-02.35.14.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-10.57.03.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-10.58.03.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-10.59.19.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-11.02.36.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-11.04.03.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
-              <img src="/clients/PicsArt_04-04-11.05.44.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/clients/name only logo.png" alt="Client" className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
           ))}
         </div>
@@ -704,7 +705,7 @@ function Home() {
         <h2 className="text-3xl md:text-5xl font-semibold text-center text-gray-900 mb-8 md:mb-16">Why teams choose Codescape</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           <div className="flex flex-col gap-6 h-full">
-            <StatsBlock title="80+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
+            <StatsBlock title="80+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.25.58.webp", "/clients/1_20260619_150305_0000.webp", "/clients/2_20260619_150305_0001.webp", "/clients/3_20260619_150305_0002.webp", "/clients/4_20260619_150305_0003.webp", "/clients/6_20260619_145139_0005.webp", "/clients/8_20260619_145139_0007.webp", "/clients/9_20260619_145139_0008.webp", "/clients/10_20260619_145139_0009.webp", "/clients/11_20260619_145139_0010.webp", "/clients/12_20260619_145139_0011.webp", "/clients/Untitled design_20260619_144136_0000.webp", "/clients/Untitled design_20260619_144438_0000.webp", "/clients/PicsArt_04-04-02.31.04.png", "/clients/PicsArt_04-04-02.32.55.png", "/clients/name only logo.png"]} icon={<UsersIcon />} />
             <div className="flex-1 relative rounded-[40px] overflow-hidden group min-h-[200px]">
               <img src="/why/1.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex flex-col justify-end" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%)' }}>

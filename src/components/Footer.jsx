@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 function Footer() {
   return (
     <footer className="pt-16 md:pt-24 pb-12 bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] px-6 md:px-24">
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-20 mb-12 md:mb-20">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-20 mb-12 md:mb-20 items-start">
         {/* Brand Column */}
         <div className="flex flex-col gap-8">
           <img src="/logo.png" alt="Codescape Logo" className="h-8 w-auto self-start" />
@@ -66,8 +66,21 @@ function Footer() {
                 Careers
               </NavLink>
             </li>
-
           </ul>
+        </div>
+
+        {/* Video Column — fills the previously blank 5th slot */}
+        <div className="col-span-2 md:col-span-1 self-stretch">
+          <div className="relative w-full h-full min-h-[220px] rounded-2xl overflow-hidden bg-gray-100">
+            <video
+              src="/footer/fo.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
         </div>
       </div>
 
