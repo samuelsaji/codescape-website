@@ -120,15 +120,6 @@ function About() {
         </div>
       </section>
 
-      {/* Final Finisher */}
-      <footer className="relative z-10 py-64 px-8 lg:px-24 bg-gray-900 text-center rounded-t-[100px] lg:rounded-t-[160px]">
-        <h2 className="text-6xl lg:text-[10vw] font-semibold text-white tracking-tighter leading-none mb-16">
-          Ready to <br /><span className="text-blue-400 italic">Codescape?</span>
-        </h2>
-        <button className="px-16 py-8 bg-white text-gray-900 rounded-full font-bold text-2xl hover:scale-105 hover:shadow-[0_20px_60px_-15px_rgba(255,255,255,0.2)] transition-all active:scale-95 shadow-2xl">
-          Let's Begin
-        </button>
-      </footer>
 
       <style dangerouslySetInnerHTML={{
         __html: `
