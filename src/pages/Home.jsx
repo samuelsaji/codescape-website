@@ -10,7 +10,7 @@ function Hero() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   return (
-    <main className="px-20 py-20 flex flex-col md:flex-row items-center justify-between gap-16">
+    <main className="px-6 md:px-20 py-12 md:py-20 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16">
       <div className="flex-1 max-w-2xl">
         <div className="flex flex-wrap gap-3 mb-8">
           <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-full">
@@ -23,7 +23,7 @@ function Hero() {
             <span className="text-xs font-medium text-gray-600">4.9 <span className="text-green-500">★</span> 4.9</span>
           </div>
         </div>
-        <h1 className="text-6xl md:text-7xl font-semibold text-gray-900 leading-[1.1] tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-900 leading-[1.1] tracking-tight">
           Where <span className="text-blue-500">Creativity</span> Meets Technology
         </h1>
       </div>
@@ -63,10 +63,10 @@ function LogoItem({ icon, text }) {
 
 function PortfolioCard({ title, image, tags, color = "bg-gray-900", hasVideo = false }) {
   return (
-    <div className={`group relative flex-shrink-0 w-[450px] h-[550px] ${color} rounded-[40px] overflow-hidden cursor-pointer shadow-2xl transition-transform duration-500 hover:scale-[1.01]`}>
+    <div className={`group relative flex-shrink-0 w-[300px] sm:w-[350px] md:w-[450px] h-[400px] sm:h-[480px] md:h-[550px] ${color} rounded-[30px] md:rounded-[40px] overflow-hidden cursor-pointer shadow-2xl transition-transform duration-500 hover:scale-[1.01]`}>
       <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-      <div className="absolute inset-0 p-10 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/20 to-transparent">
-        <h3 className="text-3xl font-bold text-white mb-6 leading-tight max-w-[350px]">{title}</h3>
+      <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex flex-col justify-end" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.15) 70%, transparent 100%)', paddingTop: '120px' }}>
+        <h3 className="text-xl md:text-3xl font-bold text-white mb-4 md:mb-6 leading-tight max-w-[350px]">{title}</h3>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <span key={tag} className="px-4 py-2 rounded-full border border-white/20 text-white/70 text-xs font-medium backdrop-blur-md">
@@ -113,7 +113,7 @@ function HorizontalScrollSection({ children }) {
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-white">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden no-scrollbar">
-        <div ref={scrollRef} className="flex px-20 gap-8 transition-transform duration-100 ease-out" style={{ transform: `translateX(${-translateX}px)` }}>
+        <div ref={scrollRef} className="flex px-6 md:px-20 gap-4 md:gap-8 transition-transform duration-100 ease-out" style={{ transform: `translateX(${-translateX}px)` }}>
           {children}
         </div>
       </div>
@@ -241,8 +241,8 @@ function CTASection() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   return (
-    <section className="px-20 pb-20">
-      <div className="relative h-[400px] rounded-[40px] overflow-hidden flex flex-col items-center justify-center">
+    <section className="px-6 md:px-20 pb-12 md:pb-20">
+      <div className="relative h-[300px] md:h-[400px] rounded-[30px] md:rounded-[40px] overflow-hidden flex flex-col items-center justify-center">
         <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=2000" alt="Water Background" className="absolute inset-0 w-full h-full object-cover opacity-90" />
         <div className="relative z-10 text-center px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-10 tracking-tight leading-tight max-w-3xl mx-auto">
@@ -293,7 +293,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-24 px-20 bg-white">
+    <section className="py-12 md:py-24 px-6 md:px-20 bg-white">
       <h2 className="text-5xl font-bold text-center text-gray-900 mb-20">Trusted By 400+ Companies</h2>
       <ZuckerbergTestimonial />
       <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
@@ -322,13 +322,35 @@ function TestimonialCard({ name, title, quote, avatar }) {
 }
 
 function FeaturedTestimonial() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const slides = [
+    { name: "Bill Gates", title: "Co-founder @ Microsoft", image: "/testimonial/image copy 3.png" },
+    { name: "Sundar Pichai", title: "CEO @ Google", image: "/testimonial/image copy 2.png" },
+    { name: "Elon Musk", title: "CEO @ SpaceX", image: "/testimonial/image copy.png" },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide(prev => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="relative rounded-[32px] overflow-hidden aspect-[4/5] bg-gray-900 group">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Marty" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+      {slides.map((slide, i) => (
+        <img key={i} src={slide.image} alt={slide.name} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${activeSlide === i ? 'opacity-100' : 'opacity-0'}`} />
+      ))}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-10">
-        <h4 className="text-2xl font-bold text-white mb-1">Marty Kausas</h4>
-        <p className="text-gray-400 font-medium">Founder @ Pylon</p>
+        <h4 className="text-2xl font-bold text-white mb-1 transition-all duration-500">{slides[activeSlide].name}</h4>
+        <p className="text-gray-400 font-medium transition-all duration-500">{slides[activeSlide].title}</p>
+        <div className="flex gap-2 mt-4">
+          {slides.map((_, i) => (
+            <button key={i} onClick={() => setActiveSlide(i)} className={`h-1 rounded-full transition-all duration-500 ${activeSlide === i ? 'w-8 bg-white' : 'w-4 bg-white/30'}`} />
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -375,7 +397,7 @@ function FAQSection() {
   };
 
   return (
-    <section className="py-24 px-20 bg-white border-t border-gray-50">
+    <section className="py-12 md:py-24 px-6 md:px-20 bg-white border-t border-gray-50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-2">Common Questions</h2>
@@ -487,8 +509,8 @@ function FAQSection() {
 
 function TalentCarousel() {
   const talents = [
-    { name: "Samual", role: "Product designer", exp: "7+ years", tags: ["FinTech", "AI", "Healthcare", "Crypto"], workedWith: "Coca-Cola", image: "https://images.unsplash.com/photo-1506794778242-92bb52bd3586?auto=format&fit=crop&q=80&w=400" },
-    { name: "Joel", role: "Illustrator", exp: "11+ years", tags: ["E-commerce", "Gaming", "NFT"], workedWith: "Disney", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400" },
+    { name: "Samual", role: "Product designer", exp: "7+ years", tags: ["FinTech", "AI", "Healthcare", "Crypto"], workedWith: "Coca-Cola", image: "/workers/WhatsApp Image 2026-06-18 at 10.21.00 PM.jpeg" },
+    { name: "Joel", role: "Illustrator", exp: "11+ years", tags: ["E-commerce", "Gaming", "NFT"], workedWith: "Disney", image: "/workers/WhatsApp Image 2026-06-18 at 10.28.35 PM.jpeg" },
     { name: "Eldho", role: "Brand designer", exp: "15+ years", tags: ["SaaS", "EdTech", "FinTech", "AI"], workedWith: "PandaDoc", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" },
     { name: "Jhon", role: "Graphic artist", exp: "15+ years", tags: ["Gaming", "AI", "Fashion", "Advertising"], workedWith: "MTV", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" },
     { name: "Nick", role: "Full-Stack Developer", exp: "8+ years", tags: ["HealtTech", "SaaS"], workedWith: "VERIZON", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400" }
@@ -509,23 +531,18 @@ function TalentCarousel() {
   }, []);
   return (
     <div ref={containerRef} className="h-[160vh] relative z-20">
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden bg-white px-20">
-        <div className="flex justify-between items-center mb-16 pt-24">
-          <h2 className="text-3xl font-semibold text-gray-900">Why hire if you can subscribe to 200+ vetted talents?</h2>
+      <div className="sticky top-[56px] md:top-[72px] h-[calc(100vh-56px)] md:h-[calc(100vh-72px)] w-full flex flex-col justify-center overflow-hidden bg-white px-6 md:px-20">
+        <div className="flex justify-between items-center mb-8 md:mb-16">
+          <h2 className="text-xl md:text-3xl font-semibold text-gray-900">Why hire if you can subscribe to 200+ vetted talents?</h2>
         </div>
-        <div className="flex gap-12 transition-transform duration-75 ease-out will-change-transform" style={{ transform: `translateX(-${scrollProgress * (talents.length * 200)}px)` }}>
+        <div className="flex gap-6 md:gap-12 transition-transform duration-75 ease-out will-change-transform" style={{ transform: `translateX(-${scrollProgress * (talents.length * 200)}px)` }}>
           {talents.map((talent, i) => (
-            <div key={i} className="min-w-[400px] flex-shrink-0 group">
+            <div key={i} className="min-w-[260px] sm:min-w-[320px] md:min-w-[400px] flex-shrink-0 group">
               <div className="rounded-[40px] overflow-hidden bg-[#f5f5f7] mb-8 aspect-[1/1.1] relative">
-                <img src={talent.image} alt={talent.name} className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0" />
+                <img src={talent.image} alt={talent.name} className="absolute inset-0 w-full h-full object-cover" />
               </div>
               <p className="text-[12px] font-bold text-gray-400 mb-2">{talent.name}</p>
               <h3 className="text-2xl font-black text-gray-900 mb-6">{talent.role}, <span className="text-gray-400 font-medium text-lg">{talent.exp}</span></h3>
-              <div className="flex flex-wrap gap-2 mb-10">
-                {talent.tags.map(tag => (
-                  <span key={tag} className="px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-white shadow-sm">{tag}</span>
-                ))}
-              </div>
             </div>
           ))}
         </div>
@@ -588,9 +605,9 @@ function ZuckerbergTestimonial() {
           {/* Grayscale portrait overlapping the bar */}
           <div className="relative z-10 w-[220px] md:w-[260px] aspect-[4/5] rounded-[30px] overflow-hidden shadow-xl group border-4 border-white bg-gray-100">
             <img
-              src=""
-              alt=""
-              className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-105 group-hover:scale-100"
+              src="/testimonial/image.png"
+              alt="Testimonial"
+              className="w-full h-full object-cover object-top"
             />
             {/* Subtle Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -605,16 +622,39 @@ function ZuckerbergTestimonial() {
 function Home() {
   const [activeCategory, setActiveCategory] = useState(0);
   const categories = ['ERP Implementation', 'Store & Warehouse', 'AI Automation', 'Digital Transformation'];
+
+  // Images per category — each array maps 1:1 to the services array below.
+  // Add real images for each category as they become available.
+  const categoryImages = [
+    // ERP Implementation
+    [
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.30 PM.jpeg",
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.30 PM(1).jpeg",
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.31 PM.jpeg",
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.31 PM(1).jpeg",
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.31 PM(2).jpeg",
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.32 PM.jpeg",
+      "/erp/WhatsApp Image 2026-06-18 at 11.04.32 PM(1).jpeg",
+    ],
+    // Store & Warehouse
+    ["/ware/WhatsApp Image 2026-06-18 at 11.05.43 PM.jpeg", "/ware/WhatsApp Image 2026-06-18 at 11.05.43 PM(1).jpeg", "/ware/WhatsApp Image 2026-06-18 at 11.05.44 PM.jpeg", "/ware/WhatsApp Image 2026-06-18 at 11.05.44 PM(1).jpeg", "/ware/WhatsApp Image 2026-06-18 at 11.05.44 PM(2).jpeg", "/ware/WhatsApp Image 2026-06-18 at 11.05.44 PM(3).jpeg", "/ware/WhatsApp Image 2026-06-18 at 11.05.45 PM.jpeg"],
+    // AI Automation
+    ["/ai/WhatsApp Image 2026-06-18 at 11.08.34 PM.jpeg", "/ai/WhatsApp Image 2026-06-18 at 11.08.35 PM.jpeg", "/ai/WhatsApp Image 2026-06-18 at 11.08.35 PM(1).jpeg", "/ai/WhatsApp Image 2026-06-18 at 11.08.35 PM(2).jpeg", "/ai/WhatsApp Image 2026-06-18 at 11.08.35 PM(3).jpeg", "/ai/WhatsApp Image 2026-06-18 at 11.08.36 PM.jpeg", "/ai/WhatsApp Image 2026-06-18 at 11.08.36 PM(1).jpeg"],
+    // Digital Transformation
+    ["/digital/WhatsApp Image 2026-06-18 at 11.11.21 PM.jpeg", "/digital/WhatsApp Image 2026-06-18 at 11.11.22 PM.jpeg", "/digital/WhatsApp Image 2026-06-18 at 11.11.22 PM(1).jpeg", "/digital/WhatsApp Image 2026-06-18 at 11.11.22 PM(2).jpeg", "/digital/WhatsApp Image 2026-06-18 at 11.11.22 PM(3).jpeg", "/digital/WhatsApp Image 2026-06-18 at 11.11.23 PM.jpeg", "/digital/WhatsApp Image 2026-06-18 at 11.11.23 PM(1).jpeg"],
+  ];
+
   // Service data is kept close to the home page because it is currently only
   // used by this landing page grid.
+  const currentImages = categoryImages[activeCategory];
   const services = [
-    { title: "UI/UX design", tags: ["Website", "Landing page", "Mobile & web app", "UX/UI audit"], image: "/portfolio/web.png", wide: true },
-    { title: "Motion design & video production", tags: ["Animated videos", "2D/3D motion", "AI", "Video editing"], image: "/portfolio/motion.png", wide: true },
-    { title: "Brand identity", tags: ["Logo design", "Brand guidelines"], image: "/portfolio/brand.png" },
-    { title: "Product design", tags: ["Research", "Prototyping", "Testing"], image: "/portfolio/product.png" },
-    { title: "Graphic design", tags: ["Social media creative", "Banners"], image: "/portfolio/graphic.png" },
-    { title: "Packaging & Merch", tags: ["Packaging design", "Merchandise"], image: "/portfolio/packaging.png", wide: true },
-    { title: "Book & eBook", tags: ["Print & eBook design", "Graphics"], image: "/portfolio/book.png", wide: true }
+    { title: "UI/UX design", tags: ["Website", "Landing page", "Mobile & web app", "UX/UI audit"], image: currentImages[0], wide: true },
+    { title: "Motion design & video production", tags: ["Animated videos", "2D/3D motion", "AI", "Video editing"], image: currentImages[1], wide: true },
+    { title: "Brand identity", tags: ["Logo design", "Brand guidelines"], image: currentImages[2] },
+    { title: "Product design", tags: ["Research", "Prototyping", "Testing"], image: currentImages[3] },
+    { title: "Graphic design", tags: ["Social media creative", "Banners"], image: currentImages[4] },
+    { title: "Packaging & Merch", tags: ["Packaging design", "Merchandise"], image: currentImages[5], wide: true },
+    { title: "Book & eBook", tags: ["Print & eBook design", "Graphics"], image: currentImages[6], wide: true }
   ];
 
   return (
@@ -656,28 +696,32 @@ function Home() {
       </section>
       <HorizontalScrollSection>
         <PortfolioCard title="ERP Implementation" image="/Horizontalscroll/ERP.png" tags={["Web", "UX/UI design", "Mobile app"]} />
-        <PortfolioCard title="Store and Warehouse Automation" image="/Horizontalscroll/warehouse.png" tags={["Social media creative", "Banners", "Pitch decks",]} />
-        <PortfolioCard title="AI Automation" image="/Horizontalscroll/ai.png" tags={["Animated videos", "2D/3D motion", "AI video",]} hasVideo={true} />
-        <PortfolioCard title="Digital Transformation" image="/Horizontalscroll/digital.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
+        <PortfolioCard title="Store and Warehouse Automation" image="/Horizontalscroll/digital.png" tags={["Social media creative", "Banners", "Pitch decks",]} />
+        <PortfolioCard title="AI Automation" image="/Horizontalscroll/ai.png" tags={["Animated videos", "2D/3D motion", "AI video",]} />
+        <PortfolioCard title="Digital Transformation" image="/Horizontalscroll/warehouse.png" tags={["Logo design", "Brand guidelines", "Stationery"]} />
       </HorizontalScrollSection>
-      <section className="py-24 px-20 bg-white">
-        <h2 className="text-5xl font-semibold text-center text-gray-900 mb-16">Why teams choose Codescape</h2>
+      <section className="py-12 md:py-24 px-6 md:px-20 bg-white">
+        <h2 className="text-3xl md:text-5xl font-semibold text-center text-gray-900 mb-8 md:mb-16">Why teams choose Codescape</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-          <div className="flex flex-col gap-6">
-            <StatsBlock title="4 000+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
-            <ImageBlock title="" image="/why/1.jpeg" />
-            <ImageBlock title="" image="/why/2.jpeg" />
+          <div className="flex flex-col gap-6 h-full">
+            <StatsBlock title="80+" subtitle="Customers" logoImages={["/clients/PicsArt_04-03-11.18.38.png", "/clients/PicsArt_04-03-11.19.34.png", "/clients/PicsArt_04-03-11.25.58.png", "/clients/PicsArt_04-04-02.23.08.png", "/clients/PicsArt_04-04-02.24.06.png", "/clients/PicsArt_04-04-02.25.45.png", "/clients/PicsArt_04-04-02.28.04.png", "/clients/PicsArt_04-04-02.29.15.png"]} icon={<UsersIcon />} />
+            <div className="flex-1 relative rounded-[40px] overflow-hidden group min-h-[200px]">
+              <img src="/why/1.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </div>
+            <div className="flex-1 relative rounded-[40px] overflow-hidden group min-h-[200px]">
+              <img src="/why/2.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </div>
           </div>
-          <div className="flex flex-col"><div className="group relative bg-[#f5f5f7] rounded-[40px] overflow-hidden h-full min-h-[700px]"><div className="p-8 flex items-center gap-4"><img src="https://i.pravatar.cc/100?u=marty" alt="Marty" className="w-12 h-12 rounded-full" /><div><h4 className="font-bold text-gray-900">Marty Kausas</h4><p className="text-xs text-gray-500">Founder of <span className="text-[#FF6600] font-bold">Pylon Y</span> (W23)</p></div></div><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600" alt="Marty" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" /></div></div>
-          <div className="flex flex-col gap-6 h-full"><TagsBlock title="20,000+" subtitle="Projects completed" tags={["Motion", "Brand identity", "Product design", "Presentation", "Email marketing", "Analytics", "Marketing", "Software development", "Frontend"]} icon={<CheckIcon />} /><div className="flex-1"><StatsBlock title="80+" subtitle="Skill sets" icon={<BriefcaseIcon />} className="h-full" /></div></div>
+          <div className="flex flex-col"><div className="group relative bg-[#f5f5f7] rounded-[40px] overflow-hidden h-full min-h-[700px]"><div className="relative z-10 p-8 flex items-center gap-4"><img src="https://i.pravatar.cc/100?u=marty" alt="Marty" className="w-12 h-12 rounded-full" /><div><h4 className="font-bold text-gray-900">Samual</h4><p className="text-xs text-gray-500">Founder of <span className="text-[#FF6600] font-bold">Codescape</span></p></div></div><video src="/why/video.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" /></div></div>
+          <div className="flex flex-col gap-6 h-full"><TagsBlock title="100+" subtitle="Projects completed" tags={["Motion", "Brand identity", "Product design", "Presentation", "Email marketing", "Analytics", "Marketing", "Software development", "Frontend"]} icon={<CheckIcon />} /><div className="flex-1"><div className="bg-[#f5f5f7] rounded-[40px] overflow-hidden h-full group"><img src="/why/award.jpeg" alt="Award" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" /></div></div></div>
         </div>
       </section>
       <CTASection />
-      <section className="py-24 px-20 bg-[#f5f5f7] rounded-t-[100px] relative z-20">
+      <section className="py-12 md:py-24 px-6 md:px-20 bg-[#f5f5f7] rounded-t-[40px] md:rounded-t-[100px] relative z-20">
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="lg:w-[320px] h-fit sticky top-24 bg-[#f5f5f7] rounded-[40px] overflow-hidden flex flex-col items-center p-8 min-h-[600px] relative">
-            <div className="w-full mb-12"><h4 className="text-2xl font-black text-black-500 uppercase tracking-widest mb-2">your <span className="text-[#00C2FF]">success</span></h4><p className="text-2xl font-black text-gray-900 uppercase tracking-tighter">becomes our mission</p></div>
-            <nav className="w-full flex flex-col gap-3 relative z-10">{categories.map((cat, i) => (<button key={cat} onClick={() => setActiveCategory(i)} className={`flex items-center gap-4 px-6 py-4 rounded-full transition-all active:scale-95 ${activeCategory === i ? 'bg-white shadow-sm' : 'bg-white/50 opacity-60 hover:opacity-80'}`}><span className={`font-black uppercase ${activeCategory === i ? 'text-xs text-gray-900 tracking-widest' : 'text-[10px] text-gray-400 tracking-tight'}`}>{cat}</span></button>))}</nav>
+            <div className="w-full mb-12"><h4 className="text-3xl font-semibold text-gray-900 tracking-tight mb-1 font-sans">Your <span className="text-[#00C2FF]">Success</span></h4><p className="text-3xl font-semibold text-gray-900 tracking-tight font-sans">Becomes Our Mission</p></div>
+            <nav className="w-full flex flex-col gap-3 relative z-10">{categories.map((cat, i) => (<button key={cat} onClick={() => setActiveCategory(i)} className={`flex items-center gap-4 px-6 py-4 rounded-full transition-all active:scale-95 ${activeCategory === i ? 'bg-white shadow-sm' : 'bg-white/50 opacity-60 hover:opacity-80'}`}><span className={`font-semibold font-sans ${activeCategory === i ? 'text-sm text-gray-900 tracking-tight' : 'text-sm text-gray-400 tracking-tight'}`}>{cat}</span></button>))}</nav>
           </aside>
           <div className="flex-1"><div className="flex flex-wrap gap-x-8 gap-y-12">{services.map((service, i) => (<ServiceCard key={service.title} {...service} isSmall={i >= 2 && i <= 4} />))}</div></div>
         </div>

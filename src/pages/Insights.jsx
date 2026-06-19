@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { client, isSanityConfigured } from '../sanityClient';
-import Glance from '../components/Glance';
+
 
 const fallbackCaseStudies = [
   {
@@ -60,9 +60,7 @@ function Insights() {
   const [caseStudies, setCaseStudies] = useState(fallbackCaseStudies);
   const [articles, setArticles] = useState(fallbackArticles);
   const [isLoading, setIsLoading] = useState(true);
-  const [glanceItem, setGlanceItem] = useState(null);
-  const [glanceType, setGlanceType] = useState(null); // 'caseStudy' or 'article'
-  const [originRect, setOriginRect] = useState(null);
+
 
   const filters = ['All', 'Web Development', 'UI/UX Design', 'Mobile Apps', 'Branding', 'Consulting'];
 
@@ -101,25 +99,14 @@ function Insights() {
   // Filter buttons update activeFilter above; this derived list keeps rendering
   // simple and avoids duplicating filter logic inside JSX.
 
-  const openGlance = (e, item, type) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setOriginRect({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
-    setGlanceItem(item);
-    setGlanceType(type);
-  };
 
-  const closeGlance = () => {
-    setGlanceItem(null);
-    setGlanceType(null);
-    setOriginRect(null);
-  };
 
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-20 relative z-10 text-center">
-          <h1 className="text-7xl md:text-8xl font-semibold text-gray-900 tracking-tight mb-8 leading-none">
+        <div className="max-w-7xl mx-auto px-6 md:px-20 relative z-10 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold text-gray-900 tracking-tight mb-8 leading-none">
             Crafting Digital <span className="text-blue-500 italic">Experiences</span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500 leading-relaxed">
@@ -129,7 +116,7 @@ function Insights() {
       </section>
 
       {/* Filter Bar */}
-      <section className="pb-12 px-20">
+      <section className="pb-12 px-6 md:px-20">
         <div className="flex flex-wrap justify-center gap-3">
           {filters.map(filter => (
             <button
@@ -144,7 +131,7 @@ function Insights() {
       </section>
 
       {/* Project Grid */}
-      <section className="pb-32 px-20">
+      <section className="pb-32 px-6 md:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {isLoading ? (
             Array.from({ length: 3 }).map((_, i) => (
@@ -164,7 +151,7 @@ function Insights() {
               <article
                 key={i}
                 className="group flex flex-col h-full bg-white rounded-[40px] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 cursor-pointer"
-                onClick={(e) => openGlance(e, project, 'caseStudy')}
+                onClick={() => navigate(`/insights/${encodeURIComponent(project.title)}`)}
               >
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-50">
                   <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
@@ -195,7 +182,7 @@ function Insights() {
       </section>
 
       {/* Insights Section */}
-      <section className="py-24 px-20 bg-[#f5f5f7] rounded-[100px]">
+      <section className="py-24 px-6 md:px-20 bg-[#f5f5f7] rounded-[100px]">
         <div className="mb-20">
           <h2 className="text-5xl font-semibold text-gray-900 tracking-tight mb-4">Fresh Insights</h2>
           <p className="text-gray-500 leading-relaxed font-medium">Thought leadership and technical deep-dives.</p>
@@ -232,7 +219,7 @@ function Insights() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="px-20 mt-32 pb-32">
+      <section className="px-6 md:px-20 mt-32 pb-32">
         <div className="relative h-[400px] rounded-[60px] overflow-hidden flex flex-col items-center justify-center">
           <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=2000" alt="Water Background" className="absolute inset-0 w-full h-full object-cover opacity-90" />
           <div className="relative z-10 text-center px-6">
@@ -250,43 +237,7 @@ function Insights() {
         </div>
       </section>
 
-      {/* Glance Overlay */}
-      <Glance
-        isOpen={!!glanceItem}
-        onClose={closeGlance}
-        originRect={originRect}
-        onFullPage={glanceItem ? () => navigate(`/insights/${encodeURIComponent(glanceItem.title)}`) : undefined}
-      >
-        {glanceItem && glanceType === 'caseStudy' && (
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-6">{glanceItem.title}</h2>
-            {glanceItem.image && (
-              <div className="overflow-hidden mb-6 aspect-video bg-gray-100">
-                <img src={glanceItem.image} alt={glanceItem.title} className="w-full h-full object-cover" />
-              </div>
-            )}
-            <p className="text-gray-500 font-medium leading-relaxed mb-6">{glanceItem.description}</p>
-            {glanceItem.body && (
-              <p className="text-gray-600 leading-relaxed whitespace-pre-line">{glanceItem.body}</p>
-            )}
-          </div>
-        )}
 
-        {glanceItem && glanceType === 'article' && (
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-6">{glanceItem.title}</h2>
-            {glanceItem.img && (
-              <div className="overflow-hidden mb-6 aspect-video bg-gray-100">
-                <img src={glanceItem.img} alt={glanceItem.title} className="w-full h-full object-cover" />
-              </div>
-            )}
-            <p className="text-gray-400 font-bold text-[10px] uppercase tracking-widest mb-4">{glanceItem.date}</p>
-            {glanceItem.body && (
-              <p className="text-gray-600 leading-relaxed whitespace-pre-line">{glanceItem.body}</p>
-            )}
-          </div>
-        )}
-      </Glance>
     </div>
   );
 }

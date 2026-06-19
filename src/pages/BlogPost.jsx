@@ -63,7 +63,7 @@ function BlogPost() {
 
   if (!post) {
     return (
-      <div className="bg-white min-h-screen pt-32 px-20 text-center">
+      <div className="bg-white min-h-screen pt-32 px-6 md:px-20 text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Post not found</h1>
         <p className="text-gray-500 mb-8">The post you're looking for doesn't exist.</p>
         <button onClick={() => navigate('/insights')} className="px-8 py-3 bg-gray-900 text-white rounded-full font-semibold hover:bg-black transition-colors">

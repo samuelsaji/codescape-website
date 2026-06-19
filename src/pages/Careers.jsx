@@ -45,9 +45,9 @@ function Careers() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="px-20 py-24 flex flex-col md:flex-row items-center justify-between gap-16 border-b border-gray-100">
+      <section className="px-6 md:px-20 py-12 md:py-24 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 border-b border-gray-100">
         <div className="flex-1 max-w-2xl">
-          <h1 className="text-6xl md:text-7xl font-semibold text-gray-900 leading-[1.1] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-900 leading-[1.1] tracking-tight">
             Build the <span className="text-blue-500 italic">future of Digital</span> with us.
           </h1>
         </div>
@@ -60,7 +60,7 @@ function Careers() {
 
 
       {/* Jobs Listing */}
-      <section className="px-20 pb-32">
+      <section className="px-6 md:px-20 pb-32">
         <div className="flex flex-col gap-6">
           {isLoading ? (
             Array.from({ length: 4 }).map((_, i) => (
@@ -81,7 +81,7 @@ function Careers() {
             jobs.map((job, i) => (
               <div
                 key={i}
-                className="group p-10 bg-[#f5f5f7] border border-gray-100 rounded-[40px] flex items-center justify-between hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 cursor-pointer"
+                className="group p-6 md:p-10 bg-[#f5f5f7] border border-gray-100 rounded-[24px] md:rounded-[40px] flex items-center justify-between hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 cursor-pointer"
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   setOriginRect({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });

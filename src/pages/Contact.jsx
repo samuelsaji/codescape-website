@@ -125,23 +125,23 @@ function Contact() {
         </svg>
       </div>
 
-      <main className="relative z-10 pt-16 lg:pt-24 pb-24 px-8 lg:px-24">
+      <main className="relative z-10 pt-8 lg:pt-12 pb-12 px-8 lg:px-24">
         <div className="max-w-7xl mx-auto">
 
           {/* Hero Section */}
-          <div className="text-center mb-20 animate-in fade-in slide-in-from-bottom-5 duration-700">
-            <h1 className="text-6xl md:text-7xl font-semibold text-blue-500 tracking-tight leading-tight mb-6">
+          <div className="text-center mb-8">
+            <h1 className="text-5xl md:text-6xl font-semibold text-blue-500 tracking-tight leading-tight mb-3">
               Contact Us
             </h1>
-            <p className="text-xl text-gray-400 font-medium max-w-2xl mx-auto">
+            <p className="text-lg text-gray-400 font-medium max-w-2xl mx-auto">
               Ready to start your next digital journey? Reach out to us through any of the channels below or fill out the form.
             </p>
           </div>
 
           {/* Split Section: Details + Form */}
-          <div id="contact-section" className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch mb-32 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500">
-            <div className="space-y-8">
-              <h3 className="text-3xl font-semibold text-gray-900 tracking-tight mb-8">Reach out directly.</h3>
+          <div id="contact-section" className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch mb-12">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold text-gray-900 tracking-tight mb-4">Reach out directly.</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {contactTiles.map((tile, i) => (
                   <a
@@ -149,15 +149,17 @@ function Contact() {
                     href={tile.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group bg-white border border-gray-100 rounded-[30px] p-8 flex flex-col items-start hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-500"
+                    className="group bg-white border border-gray-100 rounded-[20px] p-5 flex flex-col items-start hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-500"
                   >
-                    <div className={`w-12 h-12 rounded-full ${tile.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500`}>
-                      {tile.icon === 'phone' && <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>}
-                      {tile.icon === 'email' && <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
-                      {tile.icon === 'linkedin' && <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>}
-                      {tile.icon === 'whatsapp' && <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.174l.33.196c1.547.917 3.325 1.403 5.143 1.405 5.544 0 10.054-4.51 10.058-10.057.002-2.692-1.047-5.224-2.953-7.127-1.906-1.904-4.438-2.953-7.128-2.954-5.548 0-10.058 4.51-10.06 10.058-.001 1.83.479 3.619 1.391 5.187l.215.366-1.122 4.096 4.134-1.084zm11.091-6.735c-.328-.164-1.942-.958-2.242-1.069-.301-.11-.519-.164-.738.164s-.847 1.069-1.039 1.288c-.192.219-.383.246-.71.083s-1.383-.51-2.635-1.627c-.974-.869-1.631-1.942-1.822-2.269-.192-.328-.021-.505.142-.668.147-.147.328-.383.492-.574s.219-.328.328-.547c.11-.219.055-.41-.027-.574s-.738-1.776-1.011-2.433c-.266-.641-.539-.553-.738-.563-.191-.01-.41-.01-.628-.01s-.574.083-.875.41c-.301.328-1.148 1.12-1.148 2.733s1.175 3.17 1.339 3.389c.164.219 2.313 3.532 5.602 4.954.782.339 1.39.541 1.866.692.786.25 1.503.214 2.069.13.632-.093 1.942-.794 2.215-1.558.274-.764.274-1.42.191-1.558-.082-.137-.301-.219-.628-.383z" /></svg>}
-                      {tile.icon === 'location' && <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>}
-                      {tile.icon === 'instagram' && <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>}
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-all duration-500">
+                      {{
+                        phone: <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#3B82F6"/><path d="M16.5 14.35l-2.15-.95a1 1 0 00-1.05.15l-.95.8a8.5 8.5 0 01-3.7-3.7l.8-.95a1 1 0 00.15-1.05L8.65 6.5A1 1 0 007.7 6H6a1 1 0 00-1 1.1A12 12 0 0016.9 18a1 1 0 001.1-1v-1.7a1 1 0 00-.5-.95z" fill="#fff"/></svg>,
+                        email: <svg className="w-8 h-8" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#EA4335"/><path d="M5 8l7 5 7-5" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/><rect x="4" y="7" width="16" height="11" rx="2" stroke="#fff" strokeWidth="1.5" fill="none"/></svg>,
+                        linkedin: <svg className="w-8 h-8" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0A66C2"/><path d="M8.5 10.5v5M8.5 8v.01M11.5 15.5v-3a2 2 0 014 0v3M11.5 10.5v5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>,
+                        whatsapp: <svg className="w-8 h-8" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#25D366"/><path d="M12 4a8 8 0 00-6.9 12.05L4 20l4.05-1.07A8 8 0 1012 4zm0 14.5a6.5 6.5 0 01-3.32-.91l-.23-.14-2.42.64.65-2.38-.15-.24A6.5 6.5 0 1112 18.5z" fill="#fff"/><path d="M15.1 13.62c-.17-.08-1-.5-1.16-.55s-.27-.08-.38.08-.44.55-.54.67-.2.13-.37.04a4.7 4.7 0 01-1.39-.86 5.2 5.2 0 01-.96-1.2c-.1-.17 0-.27.08-.35s.17-.2.26-.3a1.13 1.13 0 00.17-.29.32.32 0 000-.3c-.04-.09-.38-.92-.52-1.26s-.28-.28-.38-.29h-.33a.63.63 0 00-.46.22 1.94 1.94 0 00-.6 1.44 3.36 3.36 0 00.7 1.79 7.7 7.7 0 002.95 2.6c.41.18.73.28.98.36.41.13.79.11 1.08.07.33-.05 1-.41 1.15-.81s.14-.74.1-.81-.16-.12-.33-.21z" fill="#fff"/></svg>,
+                        location: <svg className="w-8 h-8" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#EF4444"/><path d="M12 6a4 4 0 00-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 00-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#fff"/></svg>,
+                        instagram: <svg className="w-8 h-8" viewBox="0 0 24 24"><defs><linearGradient id="ig" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse"><stop stopColor="#FFC107"/><stop offset="0.5" stopColor="#F44336"/><stop offset="1" stopColor="#9C27B0"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#ig)"/><rect x="6" y="6" width="12" height="12" rx="3.5" stroke="#fff" strokeWidth="1.5" fill="none"/><circle cx="12" cy="12" r="2.8" stroke="#fff" strokeWidth="1.5" fill="none"/><circle cx="16" cy="8" r="1" fill="#fff"/></svg>
+                      }[tile.icon]}
                     </div>
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 group-hover:text-blue-500 transition-colors">
                       {tile.label}
@@ -170,7 +172,7 @@ function Contact() {
               </div>
             </div>
 
-            <div className="bg-white rounded-[60px] p-12 lg:p-20 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-[40px] p-8 lg:p-12 shadow-sm border border-gray-100">
               {status === 'success' ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
                   <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mb-8">
@@ -199,26 +201,26 @@ function Contact() {
                 </div>
               ) : (
                 <>
-                  <h3 className="text-4xl font-semibold text-gray-900 tracking-tight mb-4">Start a project.</h3>
-                  <p className="text-xl text-gray-400 font-medium mb-12">Submit the form and we'll be in touch.</p>
+                  <h3 className="text-3xl font-semibold text-gray-900 tracking-tight mb-2">Start a project.</h3>
+                  <p className="text-lg text-gray-400 font-medium mb-6">Submit the form and we'll be in touch.</p>
 
-                  <form className="space-y-10" onSubmit={handleSubmit}>
+                  <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="group relative">
-                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200" placeholder="Full Name" required />
+                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-3 outline-none focus:border-blue-500 transition-all text-base font-medium placeholder:text-gray-200" placeholder="Full Name" required />
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
                     </div>
                     <div className="group relative">
-                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200" placeholder="Email Address" required />
+                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-3 outline-none focus:border-blue-500 transition-all text-base font-medium placeholder:text-gray-200" placeholder="Email Address" required />
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
                     </div>
                     <div className="group relative">
-                      <textarea rows="3" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-4 outline-none focus:border-blue-500 transition-all text-xl font-medium placeholder:text-gray-200 resize-none" placeholder="Your inquiry..." required></textarea>
+                      <textarea rows="2" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-b border-gray-100 py-3 outline-none focus:border-blue-500 transition-all text-base font-medium placeholder:text-gray-200 resize-none" placeholder="Your inquiry..." required></textarea>
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-focus-within:w-full transition-all duration-500" />
                     </div>
                     <button
                       type="submit"
                       disabled={status === 'submitting'}
-                      className="w-full py-7 bg-gray-900 text-white rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl active:scale-95 text-xl flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full py-5 bg-gray-900 text-white rounded-full font-bold hover:bg-blue-600 transition-all shadow-xl active:scale-95 text-lg flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {status === 'submitting' ? (
                         <>

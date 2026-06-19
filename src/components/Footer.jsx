@@ -7,24 +7,24 @@ import { NavLink } from 'react-router-dom';
  */
 function Footer() {
   return (
-    <footer className="pt-24 pb-12 bg-white border-t border-gray-100 px-24">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-20 mb-20">
+    <footer className="pt-16 md:pt-24 pb-12 bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] px-6 md:px-24">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-20 mb-12 md:mb-20">
         {/* Brand Column */}
         <div className="flex flex-col gap-8">
           <img src="/logo.png" alt="Codescape Logo" className="h-8 w-auto self-start" />
           <p className="text-gray-400 font-medium leading-relaxed max-w-[280px]">
             Where Creativity Meets Technology
           </p>
-          <div className="flex gap-4">
-            {[
-              { label: "Li", href: "https://linkedin.com/company/codescape", color: "hover:bg-blue-600 hover:text-white" },
-              { label: "In", href: "https://instagram.com/thecodescape", color: "hover:bg-pink-600 hover:text-white" },
-              { label: "Wa", href: "https://wa.me/918921258262", color: "hover:bg-green-600 hover:text-white" }
-            ].map(social => (
-              <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 font-bold text-xs ${social.color} transition-all`}>
-                {social.label}
-              </a>
-            ))}
+          <div className="flex gap-3">
+            <a href="https://linkedin.com/company/codescape" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center hover:scale-110 transition-all">
+              <svg className="w-9 h-9" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0A66C2"/><path d="M8.5 10.5v5M8.5 8v.01M11.5 15.5v-3a2 2 0 014 0v3M11.5 10.5v5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            </a>
+            <a href="https://instagram.com/thecodescape" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center hover:scale-110 transition-all">
+              <svg className="w-9 h-9" viewBox="0 0 24 24"><defs><linearGradient id="ig-footer" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse"><stop stopColor="#FFC107"/><stop offset="0.5" stopColor="#F44336"/><stop offset="1" stopColor="#9C27B0"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig-footer)"/><rect x="6" y="6" width="12" height="12" rx="3.5" stroke="#fff" strokeWidth="1.5" fill="none"/><circle cx="12" cy="12" r="2.8" stroke="#fff" strokeWidth="1.5" fill="none"/><circle cx="16" cy="8" r="1" fill="#fff"/></svg>
+            </a>
+            <a href="https://wa.me/918921258262" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center hover:scale-110 transition-all">
+              <svg className="w-9 h-9" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#25D366"/><path d="M12 4a8 8 0 00-6.9 12.05L4 20l4.05-1.07A8 8 0 1012 4zm0 14.5a6.5 6.5 0 01-3.32-.91l-.23-.14-2.42.64.65-2.38-.15-.24A6.5 6.5 0 1112 18.5z" fill="#fff"/><path d="M15.1 13.62c-.17-.08-1-.5-1.16-.55s-.27-.08-.38.08-.44.55-.54.67-.2.13-.37.04a4.7 4.7 0 01-1.39-.86 5.2 5.2 0 01-.96-1.2c-.1-.17 0-.27.08-.35s.17-.2.26-.3a1.13 1.13 0 00.17-.29.32.32 0 000-.3c-.04-.09-.38-.92-.52-1.26s-.28-.28-.38-.29h-.33a.63.63 0 00-.46.22 1.94 1.94 0 00-.6 1.44 3.36 3.36 0 00.7 1.79 7.7 7.7 0 002.95 2.6c.41.18.73.28.98.36.41.13.79.11 1.08.07.33-.05 1-.41 1.15-.81s.14-.74.1-.81-.16-.12-.33-.21z" fill="#fff"/></svg>
+            </a>
           </div>
         </div>
 

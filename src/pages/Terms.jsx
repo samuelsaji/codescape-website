@@ -9,7 +9,7 @@ function Terms() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="px-20 pt-32 pb-16 text-center">
+      <section className="px-6 md:px-20 pt-32 pb-16 text-center">
         <h1 className="text-6xl md:text-7xl font-semibold text-gray-900 tracking-tight mb-8 leading-none">
           Terms and <span className="text-blue-500">Conditions.</span>
         </h1>
@@ -25,7 +25,7 @@ function Terms() {
       </section>
 
       {/* Content Section */}
-      <section className="px-20 pb-32">
+      <section className="px-6 md:px-20 pb-32">
         <div className="max-w-4xl mx-auto bg-white border border-gray-100 rounded-[60px] p-16 md:p-24 shadow-sm">
 
           {/* Section 1: Introduction */}
