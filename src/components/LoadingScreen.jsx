@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 
 const loadingWords = [
   'Hello',
-  '\u0d28\u0d2e\u0d38\u0d4d\u0d15\u0d3e\u0d30\u0d02',
-  '\u0928\u092e\u0938\u094d\u0924\u0947',
+  'നമസ്കാരം',
+  'नमस्ते',
   'Hola',
   'Bonjour',
   'Ciao',
-  '\u3053\u3093\u306b\u3061\u306f',
-  '\uc548\ub155\ud558\uc138\uc694',
+  'こんにちは',
+  '안녕하세요',
   'Hallo',
   'Ola',
   'Xin chao',
@@ -59,14 +59,14 @@ function LoadingScreen({ onFinished }) {
   return (
     <div className={`fixed inset-0 z-[10000] bg-white flex items-center justify-center transition-transform duration-1000 ease-in-out ${!show ? 'translate-y-[-100%]' : ''}`} style={{ transition: 'transform 1s cubic-bezier(0.85, 0, 0.15, 1)' }}>
       <div className="flex flex-col items-center">
-        <h1 className="text-7xl md:text-8xl font-black text-[#00C2FF] tracking-tighter transition-all duration-300 transform scale-110">
+        <h1 className={`text-7xl md:text-8xl font-black tracking-tighter transition-all duration-300 transform scale-110 ${loadingWords[index] === 'Welcome' ? 'text-gray-900' : 'text-[#00C2FF]'}`}>
           {loadingWords[index]}
         </h1>
         <div className="mt-8 flex gap-1">
           {loadingWords.map((_, i) => (
             <div
               key={i}
-              className={`h-1.5 rounded-full bg-[#00C2FF] transition-all duration-300 ${i === index ? 'w-8' : 'w-1.5 opacity-20'}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? 'w-8 bg-[#00C2FF]' : 'w-1.5 bg-[#00C2FF] opacity-30'}`}
             />
           ))}
         </div>

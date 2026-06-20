@@ -261,18 +261,51 @@ function CTASection() {
 function ConsultationSection() {
   const navigate = useNavigate();
   return (
-    <section className="relative h-[320px] rounded-[100px] overflow-hidden -mt-12 mb-24 z-10 mx-20">
-      <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=2000" alt="Moss Landscape" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-black/30" />
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-[1.1] max-w-4xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">Free consultation to scope your creative projects</h2>
-        <button onClick={() => navigate('/contact')} className="flex items-center gap-4 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/30 text-white rounded-full font-bold hover:bg-white/20 transition-all shadow-2xl active:scale-95 text-base group">
-          <span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&gt;&gt;&gt;</span>Book demo<span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&lt;&lt;&lt;</span>
-        </button>
-      </div>
-    </section>
-  )
+    <div className="mx-20 -mt-12 mb-24 z-10">
+      <section className="relative h-[320px] rounded-[100px] overflow-hidden">
+
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="/cons/bg.jpeg"
+            alt=""
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center center',
+            }}
+            draggable={false}
+          />
+        </div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        {/* Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-[1.1] max-w-4xl mx-auto mb-8 drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+            Free consultation to scope your creative projects
+          </h2>
+          <button
+            onClick={() => navigate('/contact')}
+            className="flex items-center gap-4 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/30 text-white rounded-full font-bold hover:bg-white/20 transition-all shadow-2xl active:scale-95 text-base group"
+          >
+            <span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&gt;&gt;&gt;</span>
+            Book demo
+            <span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&lt;&lt;&lt;</span>
+          </button>
+        </div>
+
+      </section>
+    </div>
+  );
 }
+
+
 
 function TestimonialsSection() {
   const testimonials = [
@@ -357,150 +390,51 @@ function FeaturedTestimonial() {
 }
 
 function FAQSection() {
-  const [activeId, setActiveId] = useState(0);
-  const [isDragOver, setIsDragOver] = useState(false);
-  const [draggedId, setDraggedId] = useState(null);
+  const [openId, setOpenId] = useState(null);
 
   const faqs = [
-    { question: "Is this a physical book?", answer: "No, it's a digital book for now...", detail: "I want it to be like a really fucking nice coffee table style book..." },
-    { question: "How do you make the illustrations?", answer: "We use a combination of hand-drawn techniques...", detail: "Each piece goes through multiple stages of refinement..." },
-    { question: "When will it launch?", answer: "We are on track for a late 202 release...", detail: "The development is split into three main phases..." },
-    { question: "How much will it cost?", answer: "Pricing will be tiered...", detail: "We believe in transparent pricing..." }
+    { question: "Is this a physical book?", answer: "No, it's a digital book for now. I want it to be like a really fucking nice coffee table style book..." },
+    { question: "How do you make the illustrations?", answer: "We use a combination of hand-drawn techniques. Each piece goes through multiple stages of refinement..." },
+    { question: "When will it launch?", answer: "We are on track for a late 2026 release. The development is split into three main phases..." },
+    { question: "How much will it cost?", answer: "Pricing will be tiered. We believe in transparent pricing..." }
   ];
 
-  const handleDragStart = (e, idx) => {
-    e.dataTransfer.setData("text/faq-id", idx);
-    setDraggedId(idx);
-  };
-
-  const handleDragEnd = () => {
-    setDraggedId(null);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsDragOver(false);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const faqIdStr = e.dataTransfer.getData("text/faq-id");
-    const faqId = parseInt(faqIdStr, 10);
-    if (!isNaN(faqId)) {
-      setActiveId(faqId);
-    }
-    setIsDragOver(false);
-  };
+  const toggle = (idx) => setOpenId(openId === idx ? null : idx);
 
   return (
-    <section className="py-12 md:py-24 px-6 md:px-20 bg-white border-t border-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+    <section className="py-8 md:py-12 px-6 md:px-20 bg-white border-t border-gray-50">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
           <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-2">Common Questions</h2>
-          <p className="text-gray-400 text-sm font-medium">Drag a question card from the left and drop it into the slot on the right</p>
         </div>
-        
-        <div className="flex flex-col lg:flex-row gap-16 items-stretch">
-          {/* Left: Draggable Questions */}
-          <div className="lg:w-1/2 flex flex-col gap-4">
-            {faqs.map((faq, idx) => {
-              const isActive = activeId === idx;
-              const isBeingDragged = draggedId === idx;
-              return (
-                <div
-                  key={idx}
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, idx)}
-                  onDragEnd={handleDragEnd}
-                  onClick={() => setActiveId(idx)}
-                  className={`flex items-center justify-between p-6 bg-[#f5f5f7] border rounded-3xl cursor-grab active:cursor-grabbing transition-all select-none hover:shadow-md hover:scale-[1.01] ${
-                    isActive
-                      ? 'border-[#00C2FF] bg-[#00C2FF]/5 shadow-sm'
-                      : 'border-transparent'
-                  } ${isBeingDragged ? 'opacity-40 border-dashed border-gray-300' : 'opacity-100'}`}
+
+        <div className="flex flex-col gap-4">
+          {faqs.map((faq, idx) => {
+            const isOpen = openId === idx;
+            return (
+              <div key={idx} className="rounded-2xl bg-[#f5f5f7] overflow-hidden transition-all duration-300">
+                <button
+                  onClick={() => toggle(idx)}
+                  className="w-full flex items-center justify-between px-8 py-6 text-left cursor-pointer group"
                 >
-                  <div className="flex items-center gap-4">
-                    {/* Drag Handle Icon */}
-                    <div className="text-gray-300">
-                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M8 6a2 2 0 11-4 0 2 2 0 014 0zM8 12a2 2 0 11-4 0 2 2 0 014 0zM8 18a2 2 0 11-4 0 2 2 0 014 0zM14 6a2 2 0 11-4 0 2 2 0 014 0zM14 12a2 2 0 11-4 0 2 2 0 014 0zM14 18a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    </div>
-                    <span className={`text-base font-bold tracking-tight ${isActive ? 'text-gray-900' : 'text-gray-500'}`}>
-                      {faq.question}
-                    </span>
-                  </div>
-                  <div className="text-gray-300">
-                    <svg className="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  <span className="text-base font-semibold text-gray-800 tracking-tight">{faq.question}</span>
+                  <div className={`w-9 h-9 rounded-full bg-gray-400 flex items-center justify-center flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Right: Drop Slot Reader */}
-          <div className="lg:w-1/2 flex flex-col justify-center">
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              className={`relative bg-[#f9f9f9] border-2 rounded-[40px] overflow-hidden shadow-lg transition-all duration-300 min-h-[420px] flex flex-col ${
-                isDragOver
-                  ? 'border-[#00C2FF] bg-[#00C2FF]/5 scale-[1.02] shadow-[0_0_25px_rgba(0,194,255,0.15)]'
-                  : 'border-gray-100'
-              }`}
-            >
-              {/* Reader Header / Drop Slot */}
-              <div className={`px-10 py-8 border-b transition-all duration-300 flex gap-6 items-center ${
-                isDragOver ? 'bg-[#00C2FF]/10 border-[#00C2FF]/30' : 'bg-white border-gray-100'
-              }`}>
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex gap-4 items-center">
-                    <span className={`text-xs font-black uppercase tracking-wider ${isDragOver ? 'text-[#00C2FF]' : 'text-gray-300'}`}>
-                      READER SLOT:
-                    </span>
-                    <span className="text-xs px-2 py-0.5 bg-gray-100 rounded text-gray-500 font-bold uppercase tracking-widest animate-pulse">
-                      {isDragOver ? 'READY' : 'ACTIVE'}
-                    </span>
-                  </div>
-                  {/* Visual Drop Icon */}
-                  <div className={`transition-all duration-300 ${isDragOver ? 'translate-y-1 scale-110 text-[#00C2FF]' : 'text-gray-300'}`}>
-                    <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
+                </button>
+                <div
+                  className="overflow-hidden transition-all duration-300 ease-in-out"
+                  style={{ maxHeight: isOpen ? '300px' : '0px', opacity: isOpen ? 1 : 0 }}
+                >
+                  <div className="px-8 pb-6">
+                    <p className="text-gray-500 font-medium leading-relaxed">{faq.answer}</p>
                   </div>
                 </div>
               </div>
-
-              {/* Reader Display Screen */}
-              <div className="px-10 py-10 flex-1 flex flex-col gap-6 justify-center">
-                <div className="flex gap-6 items-start">
-                  <span className="text-xs font-black text-gray-300 uppercase tracking-widest pt-1.5">IN:</span>
-                  <h3 className="text-xl font-bold text-gray-950 uppercase tracking-wide leading-relaxed">
-                    {faqs[activeId].question}
-                  </h3>
-                </div>
-                <div className="h-[1px] bg-gray-200/60 my-2" />
-                <div className="flex gap-6 items-start">
-                  <span className="text-xs font-black text-gray-300 uppercase tracking-widest pt-1.5">OUT:</span>
-                  <div className="flex flex-col gap-4">
-                    <p className="text-lg font-bold text-gray-900 tracking-tight leading-relaxed">
-                      {faqs[activeId].answer}
-                    </p>
-                    <p className="text-gray-500 font-medium leading-loose max-w-xl">
-                      {faqs[activeId].detail}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

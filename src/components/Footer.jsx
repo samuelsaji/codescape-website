@@ -70,8 +70,8 @@ function Footer() {
         </div>
 
         {/* Video Column — fills the previously blank 5th slot */}
-        <div className="col-span-2 md:col-span-1 self-stretch">
-          <div className="relative w-full h-full min-h-[220px] rounded-2xl overflow-hidden bg-gray-100">
+        <div className="col-span-2 md:col-span-1 flex items-center justify-center">
+          <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden bg-gray-100">
             <video
               src="/footer/fo.mp4"
               autoPlay

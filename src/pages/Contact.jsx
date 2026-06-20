@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
@@ -54,16 +54,7 @@ function Contact() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'rate_limited'
 
-  useEffect(() => {
-    // Scroll smoothly to center the contact details/form section on page load
-    const timer = setTimeout(() => {
-      const element = document.getElementById('contact-section');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+
 
   const contactTiles = [
     { label: "Phone", info: "+91 8921258262", href: "tel:+918921258262", icon: "phone", color: "bg-blue-100 text-blue-500" },

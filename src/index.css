@@ -23,6 +23,47 @@
   to { transform: scale(1); opacity: 1; }
 }
 
+@keyframes wave-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ocean-shimmer {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.05); }
+}
+
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+  25% { transform: translateY(-15px) translateX(8px); opacity: 0.6; }
+  50% { transform: translateY(-5px) translateX(-5px); opacity: 0.2; }
+  75% { transform: translateY(-20px) translateX(12px); opacity: 0.5; }
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(40px, -20px) scale(1.1); }
+  50% { transform: translate(-20px, 30px) scale(0.95); }
+  75% { transform: translate(30px, 15px) scale(1.05); }
+}
+
+@keyframes morph-blob {
+  0%, 100% { border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
+  25%  { border-radius: 55% 45% 40% 60% / 60% 55% 45% 40%; }
+  50%  { border-radius: 45% 55% 60% 40% / 40% 60% 50% 55%; }
+  75%  { border-radius: 60% 40% 45% 55% / 55% 45% 40% 60%; }
+}
+
+@keyframes glass-streak {
+  0%, 100% { opacity: 0; transform: rotate(-5deg) translateX(-10%); }
+  50% { opacity: 1; transform: rotate(-5deg) translateX(10%); }
+}
+
+@keyframes aurora-shift {
+  0% { background: linear-gradient(135deg, rgba(0,194,255,0.1) 0%, transparent 30%, transparent 70%, rgba(139,92,246,0.08) 100%); }
+  100% { background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, transparent 30%, transparent 70%, rgba(0,194,255,0.1) 100%); }
+}
+
 @theme {
   /* Tailwind animation tokens consumed with classes like animate-marquee. */
   --animate-marquee: marquee 25s linear infinite;
