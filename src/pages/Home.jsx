@@ -260,6 +260,7 @@ function CTASection() {
 
 function ConsultationSection() {
   const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="mx-20 -mt-12 mb-24 z-10">
@@ -281,6 +282,30 @@ function ConsultationSection() {
           }}
           draggable={false}
         />
+
+        {/* CTA — right side */}
+        <div className="absolute top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4 items-end" style={{ right: '415px', maxWidth: '280px' }}>
+          <p className="text-white font-black text-2xl leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] text-right">
+            Ready to build<br />something great?
+          </p>
+          <button
+            onClick={() => navigate('/contact')}
+            className="flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-sm w-fit"
+            style={{
+              background: 'rgba(255,255,255,0.22)',
+              backdropFilter: 'blur(14px)',
+              border: '1.5px solid rgba(255,255,255,0.5)',
+              color: '#fff',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              transition: 'background 0.3s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.38)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.22)'}
+          >
+            Let's Talk
+            <span style={{ fontSize: '16px' }}>→</span>
+          </button>
+        </div>
 
         {/* Pixel cursor hand — retreats bottom-left on hover */}
         <img
@@ -329,8 +354,6 @@ function ConsultationSection() {
     </div>
   );
 }
-
-
 
 
 
