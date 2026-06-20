@@ -259,51 +259,78 @@ function CTASection() {
 }
 
 function ConsultationSection() {
-  const navigate = useNavigate();
+  const [hovered, setHovered] = useState(false);
+
   return (
     <div className="mx-20 -mt-12 mb-24 z-10">
-      <section className="relative h-[320px] rounded-[100px] overflow-hidden">
+      <section
+        className="relative h-[320px] rounded-[100px] overflow-hidden cursor-pointer"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
 
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img
-            src="/cons/bg.jpeg"
-            alt=""
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center center',
-            }}
-            draggable={false}
-          />
-        </div>
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* Background */}
+        <img
+          src="/cons/bgs.png"
+          alt=""
+          style={{
+            position: 'absolute', top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center center',
+          }}
+          draggable={false}
+        />
 
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-[1.1] max-w-4xl mx-auto mb-8 drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
-            Free consultation to scope your creative projects
-          </h2>
-          <button
-            onClick={() => navigate('/contact')}
-            className="flex items-center gap-4 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/30 text-white rounded-full font-bold hover:bg-white/20 transition-all shadow-2xl active:scale-95 text-base group"
-          >
-            <span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&gt;&gt;&gt;</span>
-            Book demo
-            <span className="text-white/40 tracking-widest text-xs group-hover:text-white/60 transition-colors">&lt;&lt;&lt;</span>
-          </button>
-        </div>
+        {/* Pixel cursor hand — retreats bottom-left on hover */}
+        <img
+          src="/cons/simple-hand-cursor-free-png.webp"
+          alt="cursor hand"
+          draggable={false}
+          style={{
+            position: 'absolute',
+            left: '36%',
+            top: '46%',
+            transform: hovered
+              ? 'rotate(50deg) translate(-28px, 18px)'
+              : 'rotate(50deg) translate(0px, 0px)',
+            transition: 'transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1)',
+            height: '120px',
+            width: 'auto',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.25))',
+            zIndex: 10,
+            imageRendering: 'pixelated',
+          }}
+        />
+
+        {/* Realistic hand — retreats upper-right on hover */}
+        <img
+          src="/cons/hand.png"
+          alt="hand"
+          draggable={false}
+          style={{
+            position: 'absolute',
+            right: '37%',
+            top: '5%',
+            transform: hovered
+              ? 'rotate(-16deg) translate(28px, -14px)'
+              : 'rotate(-16deg) translate(0px, 0px)',
+            transition: 'transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1)',
+            height: '180px',
+            width: 'auto',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))',
+            zIndex: 10,
+          }}
+        />
 
       </section>
     </div>
   );
 }
+
+
 
 
 
